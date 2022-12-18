@@ -13,10 +13,9 @@ async function printQuestions() {
         }
     ]
     for (let i = 0; i < arrPreguntas.length; i++) {
-        const answer = document.createElement("div");
-        newQuestion.appendChild(answer);
-        answer.setAttribute("id", "respuestas");
-        window.prueba2.innerHTML = questions[0].question[i];
+        const division = document.createElement("div");
+        document.getElementById("prueba").appendChild(division);
+        division.innerHTML = questions[0].question[i];
     }
     
 }
