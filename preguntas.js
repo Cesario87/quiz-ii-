@@ -17,9 +17,20 @@ async function getQuestions() {
     return questions
 }
 
-/* getQuestions()
-    .then(questions => { printQuestion(questions)})
-    .catch(error=> alert(error)) */
+getQuestions()
+    .then(questions => {printQuestion(questions)})
+    .catch(error=> alert(error)) 
+
+function mezclarArray(arr) {
+    console.log(arr);
+    for (let i = arr.length - 1; i >= 0; i--) {
+          const s = Math.floor(Math.random() * (i + 1));
+          [arr[i], arr[s]] = [arr[s], arr[i]];
+          /* console.log(i);
+          console.log(s);
+          console.log(arr); */
+        }
+      }
 
 function printQuestion(questions) {
     // console.log(questions)
@@ -35,7 +46,8 @@ function printQuestion(questions) {
         correctas = [questions.correcta[i]]
         incorrectas = questions.incorrectas[i]
         arrMezcla[i] = correctas.concat(incorrectas)
-    }
+        mezclarArray(arrMezcla[i])
+    } 
     console.log(arrMezcla);
     
     //he creado el div espacioPregunta en el html porque necesito una separacion para crear el boton
@@ -87,10 +99,14 @@ function printQuestion(questions) {
 }
 
 
-//document.querySelector('#btn').addEventListener('click',printQuestion())
+document.querySelector('#btn').addEventListener('click',nextQuestion)
 
 
-
+function nextQuestion() {
+    document.querySelector('#espacioPregunta').innerHTML = ''
+    document.querySelector('#opciones').innerHTML = ''
+    //printQuestion()
+}
 
 
 
