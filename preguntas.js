@@ -7,49 +7,61 @@ async function getQuestions() {
     const correcta = await preguntas.map(element => element.correct_answer);
     const incorrectas = await preguntas.map(element => element.incorrect_answers);
 
-    let arrMezcla = [...correcta, ...incorrectas[0]];//para validacion comparar con question.correcta
-    let shuffledArray = arrMezcla.sort(() => Math.random() - 0.5);
-
     const questions = 
         {
             pregunta,
-            shuffledArray,
+            correcta,
+            incorrectas,
         }
-    
 
     return questions
-    
-    
 }
 
-getQuestions()
-    .then(questions => printQuestion(questions))
-    .catch(error=> alert(error))
+/* getQuestions()
+    .then(questions => { printQuestion(questions)})
+    .catch(error=> alert(error)) */
 
 function printQuestion(questions) {
-    console.log(questions)
+    // console.log(questions)
+    // console.log(questions.correcta);
+    // console.log(questions.incorrectas);
+    let arrMezcla = [];
+    let shuffledArray = [];
+    let correctas = []
+    let incorrectas = []
+
+    for (let i = 0; i < questions.pregunta.length; i++) {
+
+        correctas = [questions.correcta[i]]
+        incorrectas = questions.incorrectas[i]
+        arrMezcla[i] = correctas.concat(incorrectas)
+    }
+    console.log(arrMezcla);
     
     //he creado el div espacioPregunta en el html porque necesito una separacion para crear el boton
 
     let imprimir = ''
-    let i = 1
-    
-    imprimir =  `<div>
-    <legend id='espacioPregunta'${i}>${questions.pregunta}</legend>
-    <label for="">${questions.shuffledArray}</label>
-    <input type="radio" id="" name="${i}" value="${questions.shuffledArray}">
-    <label for="">${questions.shuffledArray}</label>
-    <input type="radio" id="" name="${i}" value="${questions.shuffledArray}">
-    <label for="">${questions.shuffledArray}</label>
-    <input type="radio" id="" name="${i}" value="${questions.shuffledArray}">
-    <label for="">${questions.shuffledArray}</label>
-    <input type="radio" id="" name="${i}" value="${questions.shuffledArray}">
-    </div>`
-    
+    let imprimir2 = ''
+  
+   
+    for (let i = 0; i < 1; i++) {
+        imprimir =  `<div>
+        <legend id=''${i}>${questions.pregunta[i]}</legend>
+        </div>`  
 
-     
+        for (let j = 0; j < arrMezcla[i].length; j++) {
+            imprimir2 +=
+            `<div>
+            <label for="">${arrMezcla[i][j]}</label>
+            <input type="radio" id="" name="${j}" value="${arrMezcla[j]}"> 
+            </div>` //cambiar name 
     
+    }
+   
+    }
+
     document.querySelector('#espacioPregunta').innerHTML = imprimir
+    document.querySelector('#opciones').innerHTML = imprimir2
 
 
       /*   const etiqueta = document.createElement("legend");
@@ -75,7 +87,8 @@ function printQuestion(questions) {
 }
 
 
-printQuestion()
+//document.querySelector('#btn').addEventListener('click',printQuestion())
+
 
 
 
