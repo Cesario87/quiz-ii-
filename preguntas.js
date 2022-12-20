@@ -1,39 +1,85 @@
-async function printQuestions() {
-    let resultado = await fetch("https://opentdb.com/api.php?amount=1");
+
+async function getQuestions() {
+    let resultado = await fetch("https://opentdb.com/api.php?amount=10");
     let dataBase = await resultado.json();
     const preguntas = dataBase.results;
-    const pregunta = preguntas.map(element => element.question);
-    const correcta = preguntas.map(element => element.correct_answer);
-    const arrIncorrectas = preguntas.map(element => element.incorrect_answers);
+    const pregunta = await preguntas.map(element => element.question);
+    const correcta = await preguntas.map(element => element.correct_answer);
+    const incorrectas = await preguntas.map(element => element.incorrect_answers);
 
-    const questions = [
+    let arrMezcla = [...correcta, ...incorrectas[0]];//para validacion comparar con question.correcta
+    let shuffledArray = arrMezcla.sort(() => Math.random() - 0.5);
+
+    const questions = 
         {
-            "question": pregunta,
-            "correcta": correcta,
-            "incorrectas": arrIncorrectas,
+            pregunta,
+            shuffledArray,
         }
-    ]
+    
 
-        let arrMezcla = [...correcta, ...arrIncorrectas[0]];
-        let shuffledArray = arrMezcla.sort(() => Math.random() - 0.5);
-        const division = document.createElement("div");
-        document.getElementById("prueba").appendChild(division);
-        division.setAttribute("id", "espacioPregunta");
-        const etiqueta = document.createElement("legend");
+    return questions
+    
+    
+}
+
+getQuestions()
+    .then(questions => printQuestion(questions))
+    .catch(error=> alert(error))
+
+function printQuestion(questions) {
+    console.log(questions)
+    
+    //he creado el div espacioPregunta en el html porque necesito una separacion para crear el boton
+
+    let imprimir = ''
+    let i = 1
+    
+    imprimir =  `<div>
+    <legend id='espacioPregunta'${i}>${questions.pregunta}</legend>
+    <label for="">${questions.shuffledArray}</label>
+    <input type="radio" id="" name="${i}" value="${questions.shuffledArray}">
+    <label for="">${questions.shuffledArray}</label>
+    <input type="radio" id="" name="${i}" value="${questions.shuffledArray}">
+    <label for="">${questions.shuffledArray}</label>
+    <input type="radio" id="" name="${i}" value="${questions.shuffledArray}">
+    <label for="">${questions.shuffledArray}</label>
+    <input type="radio" id="" name="${i}" value="${questions.shuffledArray}">
+    </div>`
+    
+
+     
+    
+    document.querySelector('#espacioPregunta').innerHTML = imprimir
+
+
+      /*   const etiqueta = document.createElement("legend");
         document.getElementById("espacioPregunta").appendChild(etiqueta);
-        etiqueta.innerHTML = questions[0].question;
-
+        etiqueta.innerHTML = questions.pregunta;
         for (let j = 0; j < arrMezcla.length; j++) {
+       
         const division2 = document.createElement("div");
         document.getElementById("espacioPregunta").appendChild(division2);
         division2.id = `respuesta${[j]}`;
         const opciones = document.createElement("label");
+        opciones.setAttribute('for',`${j}`)
         document.getElementById(`respuesta${[j]}`).appendChild(opciones);
         opciones.innerHTML = shuffledArray[j];
         const radio = document.createElement("input");
+        radio.setAttribute('id',`${j}`)
+        radio.setAttribute('name',`pregunta${i}`)//el name tambien deberia cambiar pero por bloque 
+        radio.setAttribute('value', `${shuffledArray[j]}`)
         radio.type = "radio";
-        division2.appendChild(radio);
-    }
+        division2.appendChild(radio); 
+    }  */
+    
 }
 
-printQuestions()
+
+printQuestion()
+
+
+
+
+
+
+
