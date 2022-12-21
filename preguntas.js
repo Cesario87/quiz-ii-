@@ -25,8 +25,8 @@ async function nextQuestion(pregunta,num) {
     
     let espacio = document.querySelector('#espacioPregunta')
     let opciones = document.querySelector('#opciones')
-    espacio.innerHTML = ''
-    opciones.innerHTML = ''
+    /* espacio.innerHTML = ''
+    opciones.innerHTML = '' */
     console.log(num);
     
    espacio.innerHTML = `<div>
@@ -42,21 +42,18 @@ async function nextQuestion(pregunta,num) {
     console.log(arrMezcla);
     
     
-   for (let j = num; j < arrMezcla[num].length; j++) {
-    imprimir2 +=
-    `<div>
-    <label for="">${arrMezcla[i][j]}</label>
-    <input type="radio" id="radio${j}" name="${Math.trunc(j/4)}" value="${arrMezcla[i][j]}"> 
-    </div>` 
-
-
+    let imprimir2 = ''
+   for (let j = 0; j < arrMezcla.length; j++) {
+        
+        imprimir2 +=`<div>
+        <label for="radio${j}">${arrMezcla[j]}</label>
+        <input type="radio" id="radio${j}" name="${num}" value="${arrMezcla[j]}"> 
+        </div>` 
     }
 
     opciones.innerHTML = imprimir2
     
 }
-
-
 
 function mezclarArray(arr) {
     
