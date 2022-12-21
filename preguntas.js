@@ -11,17 +11,17 @@ async function getQuestions() {
 "incorrect_answers" */
 
 async function init(){
-    let preguntas = await getQuestions()
+    let pregunta = await getQuestions()
     let num = 0
-    console.log(preguntas);
+    console.log(pregunta);
     document.querySelector('#btn').addEventListener('click',()=> {
-        nextQuestion(preguntas[num])
+        nextQuestion(pregunta[num],num)
         num++
     })
 }
 
 init()
-async function nextQuestion(preguntas) {
+async function nextQuestion(pregunta,num) {
     
     let espacio = document.querySelector('#espacioPregunta')
     let opciones = document.querySelector('#opciones')
@@ -30,17 +30,19 @@ async function nextQuestion(preguntas) {
     console.log(num);
     
    espacio.innerHTML = `<div>
-   <legend id='legend${num}'>${preguntas.question}</legend>
+   <legend id='legend${num}'>${pregunta.question}</legend>
    </div>` 
-   let arrMezcla = []
-   for (let i = 0; i < preguntas.question.length; i++) {
-    correctas = preguntas.correct_answer
-    incorrectas = preguntas.incorrect_answers[i]
-    arrMezcla = correctas.concat(incorrectas)
+
+    let arrMezcla = []
+    correcta = [pregunta.correct_answer]
+    incorrectas = pregunta.incorrect_answers
+    arrMezcla = correcta.concat(incorrectas)
+  
     mezclarArray(arrMezcla)
-    } 
     console.log(arrMezcla);
-   for (let j = contadorPregunta; j < arrMezcla[i].length; j++) {
+    
+    
+   for (let j = num; j < arrMezcla[num].length; j++) {
     imprimir2 +=
     `<div>
     <label for="">${arrMezcla[i][j]}</label>
@@ -51,14 +53,10 @@ async function nextQuestion(preguntas) {
     }
 
     opciones.innerHTML = imprimir2
-
-     contadorPregunta = contadorPregunta +1
-     console.log(contadorPregunta);
- 
     
 }
 
-console.log(contadorPregunta);
+
 
 function mezclarArray(arr) {
     
@@ -69,7 +67,7 @@ function mezclarArray(arr) {
         }
       }
 
-var contadorPregunta = 0 
+
 
  /* async function printQuestions() {
     console.log('jajaja');
