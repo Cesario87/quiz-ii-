@@ -12,7 +12,12 @@ async function init(){
     nextQuestion(pregunta[num],num)
     num = 1
     console.log(pregunta);
-    document.querySelector('#btn').addEventListener('click',()=> {
+    
+    document.querySelector('#btn').addEventListener('click', ()=> {
+        /* event.preventDefault()
+        console.log(event);
+        validar(pregunta[num],num) */
+        
         nextQuestion(pregunta[num],num)
         num++
     })
@@ -24,7 +29,7 @@ async function nextQuestion(pregunta,num) {
     
     let espacio = document.querySelector('#espacioPregunta')
     let opciones = document.querySelector('#opciones')
-    console.log(num);
+    //console.log(num);
     
    espacio.innerHTML = `<div>
    <legend id='legend${num}'>${pregunta.question}</legend>
@@ -36,7 +41,7 @@ async function nextQuestion(pregunta,num) {
     arrMezcla = correcta.concat(incorrectas)
   
     mezclarArray(arrMezcla)
-    console.log(arrMezcla);
+    //console.log(arrMezcla);
     
     
     let imprimir2 = ''
@@ -51,25 +56,41 @@ async function nextQuestion(pregunta,num) {
 
     opciones.innerHTML = imprimir2
 
+    validar(pregunta,num)  
+        
 
-    document.querySelector('#btn').addEventListener('click', function (event) {
+     
+}
+
+function validar(pregunta,num) {
+        
+        document.querySelector('#espacioTotal').addEventListener('change', function (event) {
 
         event.preventDefault()
         console.log(event);
-        console.log("num", num);
+
         
-        let selected = document.querySelector(`input[name="${num}"]:checked`)
+        
+        let selected = document.querySelector(`input[name="${[num]}"]:checked`)
         let counter = 0
-        console.log(counter,'counter');
-       /*  if (!selected) {
+        console.log("selected_value", selected.value);
+        console.log(pregunta.correct_answer,'correct');
+        if (!selected) {
             alert('Selecciona una opción')
             
-        }else  */if (selected.value == pregunta.correct_answer) {
+        }else if (selected.value == pregunta.correct_answer) {
            counter++
         }
-        console.log(counter,'counter')
+        console.log(counter)
+        
     }) 
-}
+        
+        
+} 
+
+
+
+
 
 function mezclarArray(arr) {
     
@@ -77,7 +98,7 @@ function mezclarArray(arr) {
           const s = Math.floor(Math.random() * (i + 1));
           [arr[i], arr[s]] = [arr[s], arr[i]];
           
-        }
-      }
+    }
+}
 
 
