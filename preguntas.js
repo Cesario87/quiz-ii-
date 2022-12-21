@@ -3,41 +3,78 @@ async function getQuestions() {
     let resultado = await fetch("https://opentdb.com/api.php?amount=10");
     let dataBase = await resultado.json();
     const preguntas = dataBase.results;
-    const pregunta = await preguntas.map(element => element.question);
-    const correcta = await preguntas.map(element => element.correct_answer);
-    const incorrectas = await preguntas.map(element => element.incorrect_answers);
 
-    const questions = 
-        {
-            pregunta,
-            correcta,
-            incorrectas,
-        }
+    return preguntas;
+}
+/* "question": 
+"correct_answer":
+"incorrect_answers" */
 
-    return questions
+async function init(){
+    let preguntas = await getQuestions()
+    let num = 0
+    console.log(preguntas);
+    document.querySelector('#btn').addEventListener('click',()=> {
+        nextQuestion(preguntas[num])
+        num++
+    })
 }
 
-getQuestions()
-    .then(questions => {printQuestion(questions)})
-    .catch(error=> alert(error)) 
+init()
+async function nextQuestion(preguntas) {
+    
+    let espacio = document.querySelector('#espacioPregunta')
+    let opciones = document.querySelector('#opciones')
+    espacio.innerHTML = ''
+    opciones.innerHTML = ''
+    console.log(num);
+    
+   espacio.innerHTML = `<div>
+   <legend id='legend${num}'>${preguntas.question}</legend>
+   </div>` 
+   let arrMezcla = []
+   for (let i = 0; i < preguntas.question.length; i++) {
+    correctas = preguntas.correct_answer
+    incorrectas = preguntas.incorrect_answers[i]
+    arrMezcla = correctas.concat(incorrectas)
+    mezclarArray(arrMezcla)
+    } 
+    console.log(arrMezcla);
+   for (let j = contadorPregunta; j < arrMezcla[i].length; j++) {
+    imprimir2 +=
+    `<div>
+    <label for="">${arrMezcla[i][j]}</label>
+    <input type="radio" id="radio${j}" name="${Math.trunc(j/4)}" value="${arrMezcla[i][j]}"> 
+    </div>` 
+
+
+    }
+
+    opciones.innerHTML = imprimir2
+
+     contadorPregunta = contadorPregunta +1
+     console.log(contadorPregunta);
+ 
+    
+}
+
+console.log(contadorPregunta);
 
 function mezclarArray(arr) {
-    console.log(arr);
+    
     for (let i = arr.length - 1; i >= 0; i--) {
           const s = Math.floor(Math.random() * (i + 1));
           [arr[i], arr[s]] = [arr[s], arr[i]];
-          /* console.log(i);
-          console.log(s);
-          console.log(arr); */
+          
         }
       }
 
-function printQuestion(questions) {
-    // console.log(questions)
-    // console.log(questions.correcta);
-    // console.log(questions.incorrectas);
+var contadorPregunta = 0 
+
+ /* async function printQuestions() {
+    console.log('jajaja');
+    let questions = await getQuestions()
     let arrMezcla = [];
-    let shuffledArray = [];
     let correctas = []
     let incorrectas = []
 
@@ -48,29 +85,30 @@ function printQuestion(questions) {
         arrMezcla[i] = correctas.concat(incorrectas)
         mezclarArray(arrMezcla[i])
     } 
-    console.log(arrMezcla);
-    
-    //he creado el div espacioPregunta en el html porque necesito una separacion para crear el boton
 
     let imprimir = ''
     let imprimir2 = ''
   
-   
-    for (let i = 0; i < 1; i++) {
-        imprimir =  `<div>
-        <legend id=''${i}>${questions.pregunta[i]}</legend>
+   if (contadorPregunta < 10) {
+    for (let i = contadorPregunta; i < 1 ; i++) {
+        imprimir +=  `<div>
+        <legend id='legend${i}'>${questions.pregunta[i]}</legend>
         </div>`  
 
-        for (let j = 0; j < arrMezcla[i].length; j++) {
+        for (let j = contadorPregunta; j < arrMezcla[i].length; j++) {
             imprimir2 +=
             `<div>
             <label for="">${arrMezcla[i][j]}</label>
-            <input type="radio" id="" name="${j}" value="${arrMezcla[j]}"> 
-            </div>` //cambiar name 
+            <input type="radio" id="radio${j}" name="${Math.trunc(j/4)}" value="${arrMezcla[i][j]}"> 
+            </div>` 
     
-    }
+        }
    
     }
+
+    
+   }
+    
 
     document.querySelector('#espacioPregunta').innerHTML = imprimir
     document.querySelector('#opciones').innerHTML = imprimir2
@@ -94,21 +132,12 @@ function printQuestion(questions) {
         radio.setAttribute('value', `${shuffledArray[j]}`)
         radio.type = "radio";
         division2.appendChild(radio); 
-    }  */
+    }  
     
-}
-
-
-document.querySelector('#btn').addEventListener('click',nextQuestion)
-
-
-function nextQuestion() {
-    document.querySelector('#espacioPregunta').innerHTML = ''
-    document.querySelector('#opciones').innerHTML = ''
-    //printQuestion()
-}
+}*/
 
 
 
 
 
+ 
