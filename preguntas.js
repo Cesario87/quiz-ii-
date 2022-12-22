@@ -24,7 +24,7 @@ async function nextQuestion(pregunta,num) {
     
     let espacio = document.querySelector('#espacioPregunta')
     let opciones = document.querySelector('#opciones')
-    console.log(num);
+    //console.log(num);
     
    espacio.innerHTML = `<div>
    <legend id='legend${num}'>${pregunta.question}</legend>
@@ -36,7 +36,7 @@ async function nextQuestion(pregunta,num) {
     arrMezcla = correcta.concat(incorrectas)
   
     mezclarArray(arrMezcla)
-    console.log(arrMezcla);
+    //console.log(arrMezcla);
     
     
     let imprimir2 = ''
@@ -44,39 +44,57 @@ async function nextQuestion(pregunta,num) {
     for (let j = 0; j < arrMezcla.length; j++) {
         imprimir2 +=`<div>
         <label for="radio${j}">${arrMezcla[j]}</label>
-        <input type="radio" id="radio${j}" name="${num}" value="${arrMezcla[j]}"> 
+        <input type="radio" id="radio${num+j}" name="${num}" value="${arrMezcla[j]}"> 
         </div>` 
 
     }
 
     opciones.innerHTML = imprimir2
 
+    validar(pregunta,num)  
 
-    document.querySelector('#btn').addEventListener('click', function (event) {
+    //PANTALLA DE RESULTADOS:
+    if(num == 10){
+    window.open("./results");
+    }
 
-        event.preventDefault()
-        console.log(event);
-        console.log("num", num);
+
+}
+
+
+let puntuacion = 0
+
+function validar(pregunta,num) {
+    
+        document.querySelector('#espacioTotal').addEventListener('change', function (event) {
         
-        let selected = document.querySelector(`input[name="${num}"]:checked`)
+        event.preventDefault()
+        console.log(event.target.value);
         let counter = 0
-        console.log(counter,'counter');
-       /*  if (!selected) {
+        
+        console.log("Estoy por "+num);
+        let selected = event.target.value;
+        
+        if (!selected) {
             alert('Selecciona una opción')
             
-        }else  if (selected.value == pregunta.correct_answer) {
-           
-        }*/
-        counter++
-        console.log(counter,'counter')
-//PANTALLA DE RESULTADOS:
-/*if(num == 10)
-window.open("./results");
-    }
+        }else if (selected == pregunta.correct_answer) {
+            counter++ 
+            puntuacion =  puntuacion + counter
+        }
+        console.log(counter, '1');
+        //falta sumar contadores preguntas
+    }) 
+   
     
-    document.querySelector('#cuadroResultados').innerHTML = counter + "/10"
-     */
-})
+    return puntuacion
+        
+} 
+
+let cuadro = document.createElement('div')
+document.getElementById('datosguardados').appendChild(cuadro)
+cuadro.innerHTML = `<h2>${puntuacion} + "/10"</h2>`
+
 
 function mezclarArray(arr) {
     
@@ -88,10 +106,13 @@ function mezclarArray(arr) {
       }
 
 
-    }
+    
 
 
-    async function getRecords() {
+    
+
+//GRÁFICA
+  /*   async function getRecords() {
         let results = await fetch("https://swapi.dev/api/people/");
         let charactersData = await results.json();
         const charactersList = charactersData.results;
@@ -120,5 +141,5 @@ function mezclarArray(arr) {
         });
       }
       getRecords()
-
+ */
     
