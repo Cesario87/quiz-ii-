@@ -56,8 +56,8 @@ async function nextQuestion(pregunta,num) {
 
     opciones.innerHTML = imprimir2
 
+    
     validar(pregunta,num)  
-        
 
      
 }
