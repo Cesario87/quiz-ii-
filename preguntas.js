@@ -1,39 +1,124 @@
-async function printQuestions() {
-    let resultado = await fetch("https://opentdb.com/api.php?amount=1");
+async function getQuestions() {
+    let resultado = await fetch("https://opentdb.com/api.php?amount=10");
     let dataBase = await resultado.json();
     const preguntas = dataBase.results;
-    const pregunta = preguntas.map(element => element.question);
-    const correcta = preguntas.map(element => element.correct_answer);
-    const arrIncorrectas = preguntas.map(element => element.incorrect_answers);
 
-    const questions = [
-        {
-            "question": pregunta,
-            "correcta": correcta,
-            "incorrectas": arrIncorrectas,
-        }
-    ]
-
-        let arrMezcla = [...correcta, ...arrIncorrectas[0]];
-        let shuffledArray = arrMezcla.sort(() => Math.random() - 0.5);
-        const division = document.createElement("div");
-        document.getElementById("prueba").appendChild(division);
-        division.setAttribute("id", "espacioPregunta");
-        const etiqueta = document.createElement("legend");
-        document.getElementById("espacioPregunta").appendChild(etiqueta);
-        etiqueta.innerHTML = questions[0].question;
-
-        for (let j = 0; j < arrMezcla.length; j++) {
-        const division2 = document.createElement("div");
-        document.getElementById("espacioPregunta").appendChild(division2);
-        division2.id = `respuesta${[j]}`;
-        const opciones = document.createElement("label");
-        document.getElementById(`respuesta${[j]}`).appendChild(opciones);
-        opciones.innerHTML = shuffledArray[j];
-        const radio = document.createElement("input");
-        radio.type = "radio";
-        division2.appendChild(radio);
-    }
+    return preguntas;
 }
 
-printQuestions()
+async function init(){
+    let pregunta = await getQuestions()
+    let num = 0
+    nextQuestion(pregunta[num],num)
+    num = 1
+    console.log(pregunta);
+    document.querySelector('#btn').addEventListener('click',()=> {
+        nextQuestion(pregunta[num],num)
+        num++
+    })
+}
+
+
+init()
+async function nextQuestion(pregunta,num) {
+    
+    let espacio = document.querySelector('#espacioPregunta')
+    let opciones = document.querySelector('#opciones')
+    console.log(num);
+    
+   espacio.innerHTML = `<div>
+   <legend id='legend${num}'>${pregunta.question}</legend>
+   </div>` 
+
+    let arrMezcla = []
+    correcta = [pregunta.correct_answer]
+    incorrectas = pregunta.incorrect_answers
+    arrMezcla = correcta.concat(incorrectas)
+  
+    mezclarArray(arrMezcla)
+    console.log(arrMezcla);
+    
+    
+    let imprimir2 = ''
+    
+    for (let j = 0; j < arrMezcla.length; j++) {
+        imprimir2 +=`<div>
+        <label for="radio${j}">${arrMezcla[j]}</label>
+        <input type="radio" id="radio${j}" name="${num}" value="${arrMezcla[j]}"> 
+        </div>` 
+
+    }
+
+    opciones.innerHTML = imprimir2
+
+
+    document.querySelector('#btn').addEventListener('click', function (event) {
+
+        event.preventDefault()
+        console.log(event);
+        console.log("num", num);
+        
+        let selected = document.querySelector(`input[name="${num}"]:checked`)
+        let counter = 0
+        console.log(counter,'counter');
+       /*  if (!selected) {
+            alert('Selecciona una opción')
+            
+        }else  if (selected.value == pregunta.correct_answer) {
+           
+        }*/
+        counter++
+        console.log(counter,'counter')
+//PANTALLA DE RESULTADOS:
+/*if(num == 10)
+window.open("./results");
+    }
+    
+    document.querySelector('#cuadroResultados').innerHTML = counter + "/10"
+     */
+})
+
+function mezclarArray(arr) {
+    
+    for (let i = arr.length - 1; i >= 0; i--) {
+          const s = Math.floor(Math.random() * (i + 1));
+          [arr[i], arr[s]] = [arr[s], arr[i]];
+          
+        }
+      }
+
+
+    }
+
+
+    async function getRecords() {
+        let results = await fetch("https://swapi.dev/api/people/");
+        let charactersData = await results.json();
+        const charactersList = charactersData.results;
+        let arrNames = charactersList.map(element => element = element.name);
+        let arrNumFilms = charactersList.map(element => element.films.length);
+        
+        new Chartist.Bar('#puntuaciones', {
+          labels: arrNames,
+          series: [arrNumFilms]
+        }, {
+          width: 250,
+          height: 350,
+          horizontalBars: true,
+          axisY: {
+            onlyInteger: true,
+            labelInterpolationFnc: function(value) {
+              return (value) + '';
+            }
+          }
+        }).on('draw', function(data) {
+          if(data.type === 'bar') {
+            data.element.attr({
+              style: 'stroke-width: 10px'
+            });
+          }
+        });
+      }
+      getRecords()
+
+    
