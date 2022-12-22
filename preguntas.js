@@ -1,3 +1,7 @@
+
+if (document.title == 'Hoja de preguntas') {
+  
+
 async function getQuestions() {
     let resultado = await fetch("https://opentdb.com/api.php?amount=10");
     let dataBase = await resultado.json();
@@ -92,11 +96,12 @@ function mezclarArray(arr) {
           
         }
       }
+}
 
-
+if(document.title == 'Results'){
   let puntuacionTotal = localStorage.getItem('puntuacion')
   document.getElementById('datosguardados').innerHTML =`<div>${puntuacionTotal}/10</div>`;
-
+}
 
 //GRÁFICA
  /*  async function getRecords() {
