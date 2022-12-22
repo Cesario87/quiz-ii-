@@ -56,7 +56,7 @@ div {
 }
 
 /*HOME/RESULTS*/
-#start, #results{
+#start, #results {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -65,10 +65,10 @@ div {
 h1 {
     color: white;
     font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
-    font-size: 300%;
+    font-size: 250%;
 }
 
-#btnStart, #btnResults {
+#btnStart {
     background-color: rgb(76, 113, 233);
     font-weight: bolder;
     color: white;
@@ -76,6 +76,15 @@ h1 {
     padding: 20% 50%;
     border-width: 5px;
     margin-top: 2%;
+}
+
+#btnResults{
+    background-color: rgb(76, 113, 233);
+    font-weight: bolder;
+    color: white; 
+    font-size: 150%;
+    padding: 2% 6%;
+    margin-top: 15%;
 }
 
 #cuadroResultados{
