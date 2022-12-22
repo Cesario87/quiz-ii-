@@ -89,3 +89,36 @@ function mezclarArray(arr) {
 
 
     }
+
+
+    async function getRecords() {
+        let results = await fetch("https://swapi.dev/api/people/");
+        let charactersData = await results.json();
+        const charactersList = charactersData.results;
+        let arrNames = charactersList.map(element => element = element.name);
+        let arrNumFilms = charactersList.map(element => element.films.length);
+        
+        new Chartist.Bar('#puntuaciones', {
+          labels: arrNames,
+          series: [arrNumFilms]
+        }, {
+          width: 250,
+          height: 350,
+          horizontalBars: true,
+          axisY: {
+            onlyInteger: true,
+            labelInterpolationFnc: function(value) {
+              return (value) + '';
+            }
+          }
+        }).on('draw', function(data) {
+          if(data.type === 'bar') {
+            data.element.attr({
+              style: 'stroke-width: 10px'
+            });
+          }
+        });
+      }
+      getRecords()
+
+    

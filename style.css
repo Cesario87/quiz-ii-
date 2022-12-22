@@ -1,14 +1,14 @@
 body {
-    background-color: rgb(37, 57, 72);
+    background-color: rgb(158, 200, 232);
 }
 
-main {
+/* main {
     display: flex;
     flex-direction: column;
     align-items: center;
     margin-top: 10%;
 
-}
+} */
 
 #espacioTotal {
     display: flex;
@@ -56,10 +56,17 @@ div {
 }
 
 /*HOME/RESULTS*/
-#start, #results {
+#start {
     display: flex;
     flex-direction: column;
     align-items: center;
+}
+
+#results{
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    margin-left: 15%;
 }
 
 h1 {
@@ -85,6 +92,10 @@ h1 {
     font-size: 150%;
     padding: 2% 6%;
     margin-top: 15%;
+    position: sticky;
+    
+    margin-top: 90%;
+    margin-left: 25%;
 }
 
 #cuadroResultados{
@@ -95,6 +106,11 @@ h1 {
 input:hover{
     cursor:pointer;
 }
+
+#SWCharacters .ct-series-a .ct-bar {
+    /* Colour of your bars */
+    stroke: rgb(249, 82, 82);
+  }
 
 @media screen and (min-width: 768px) and (max-width:1366px) {
     #espacioPregunta {
