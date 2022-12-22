@@ -90,7 +90,7 @@ function mezclarArray(arr) {
 
     }
 
-
+//GRÁFICA
     async function getRecords() {
         let results = await fetch("https://swapi.dev/api/people/");
         let charactersData = await results.json();
@@ -120,5 +120,23 @@ function mezclarArray(arr) {
         });
       }
       getRecords()
-
-    
+/*
+      //LOCAL STORAGE
+      //Guardamos un array vacío en nuestro almacenamiento local
+      const arrayDeDatos = [];
+      localStorage.setItem("Datos guardados", JSON.stringify(arrayDeDatos))
+      
+      //Cuando apretamos submit, queremos ingresar los datos en la memoria que hemos creado
+      
+      document.querySelector("#guarda-datos").addEventListener("submit", function (event) {
+          event.preventDefault();
+      
+          const name = event.target.nombre.value;
+          const mail = event.target.points.value
+      
+          const nuevosDatos = {
+              nombre: name,
+              puntos: points,
+          }
+          
+          */
