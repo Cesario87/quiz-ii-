@@ -49,7 +49,7 @@ async function nextQuestion(pregunta,num) {
     for (let j = 0; j < arrMezcla.length; j++) {
         imprimir2 +=`<div>
         <label for="radio${j}">${arrMezcla[j]}</label>
-        <input type="radio" id="radio${j}" name="${num}" value="${arrMezcla[j]}"> 
+        <input type="radio" id="radio${num+j}" name="${num}" value="${arrMezcla[j]}"> 
         </div>` 
 
     }
@@ -62,36 +62,36 @@ async function nextQuestion(pregunta,num) {
      
 }
 
+let puntuacion
 
 function validar(pregunta,num) {
-        
+    
         document.querySelector('#espacioTotal').addEventListener('change', function (event) {
-
+        
         event.preventDefault()
         console.log(event.target.value);
-
+        let counter = 0
         
         console.log("Estoy por "+num);
         let selected = event.target.value;
-        var counter = 0
-        //console.log("selected_value", selected);
-
-        //console.log(document.querySelector(`input[name="${num}"]:checked`).value);
-       // console.log(pregunta.correct_answer,'correct');
+        
         if (!selected) {
             alert('Selecciona una opción')
             
         }else if (selected == pregunta.correct_answer) {
-           counter++
+            counter++ 
+            return counter
+           
         }
-        console.log(counter)
-        //falta sumar contadores preguntas y que deje de dar error */ 
+        console.log(counter, '1');
+        //falta sumar contadores preguntas
     }) 
-        
+   
+    
         
 } 
 
-
+console.log(puntuacion, '3');
 
 
 
