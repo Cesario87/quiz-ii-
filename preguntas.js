@@ -18,13 +18,14 @@ async function init(){
     })
 }
 
-
 init()
 async function nextQuestion(pregunta,num) {
     
     let espacio = document.querySelector('#espacioPregunta')
     let opciones = document.querySelector('#opciones')
     //console.log(num);
+
+    if(num < 10){
     
    espacio.innerHTML = `<div>
    <legend id='legend${num}'>${pregunta.question}</legend>
@@ -37,7 +38,6 @@ async function nextQuestion(pregunta,num) {
   
     mezclarArray(arrMezcla)
     //console.log(arrMezcla);
-    
     
     let imprimir2 = ''
     
@@ -52,15 +52,10 @@ async function nextQuestion(pregunta,num) {
     opciones.innerHTML = imprimir2
 
     validar(pregunta,num)  
-
-    //PANTALLA DE RESULTADOS:
-    if(num == 10){
-    window.open("./results");
-    }
-
-
+  }else{
+    window.open("./results.html"); 
+  }
 }
-
 
 let puntuacion = 0
 
@@ -81,20 +76,13 @@ function validar(pregunta,num) {
         }else if (selected == pregunta.correct_answer) {
             counter++ 
             puntuacion =  puntuacion + counter
+            localStorage.setItem('puntuacion',puntuacion)
         }
         console.log(counter, '1');
-        //falta sumar contadores preguntas
+        console.log(puntuacion, 'puntuacion');
     }) 
-   
-    
-    return puntuacion
-        
+    return puntuacion  
 } 
-
-let cuadro = document.createElement('div')
-document.getElementById('datosguardados').appendChild(cuadro)
-cuadro.innerHTML = `<h2>${puntuacion} + "/10"</h2>`
-
 
 function mezclarArray(arr) {
     
@@ -106,13 +94,12 @@ function mezclarArray(arr) {
       }
 
 
-    
+  let puntuacionTotal = localStorage.getItem('puntuacion')
+  document.getElementById('datosguardados').innerHTML =`<div>${puntuacionTotal}/10</div>`;
 
-
-    
 
 //GRÁFICA
-  /*   async function getRecords() {
+ /*  async function getRecords() {
         let results = await fetch("https://swapi.dev/api/people/");
         let charactersData = await results.json();
         const charactersList = charactersData.results;
@@ -141,5 +128,5 @@ function mezclarArray(arr) {
         });
       }
       getRecords()
- */
-    
+ 
+   */ 
