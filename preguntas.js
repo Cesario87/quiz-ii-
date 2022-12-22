@@ -62,9 +62,10 @@ async function nextQuestion(pregunta,num) {
 }
 
 let puntuacion = 0
+let today = new Date().toLocaleDateString()
 
 function validar(pregunta,num) {
-    
+  
         document.querySelector('#espacioTotal').addEventListener('change', function (event) {
         
         event.preventDefault()
@@ -80,7 +81,16 @@ function validar(pregunta,num) {
         }else if (selected == pregunta.correct_answer) {
             counter++ 
             puntuacion =  puntuacion + counter
-            localStorage.setItem('puntuacion',puntuacion)
+            
+
+            //localStorage.setItem('puntuacion',puntuacion)
+            localStorage.setItem(
+              "user",
+              JSON.stringify({
+                'score': puntuacion,
+                'fecha': today,
+              })
+            );
         }
         console.log(counter, '1');
         console.log(puntuacion, 'puntuacion');
@@ -99,8 +109,8 @@ function mezclarArray(arr) {
 }
 
 if(document.title == 'Results'){
-  let puntuacionTotal = localStorage.getItem('puntuacion')
-  document.getElementById('datosguardados').innerHTML =`<div>${puntuacionTotal}/10</div>`;
+  let puntuacionTotal = JSON.parse(localStorage.getItem("user"))
+  document.getElementById('datosguardados').innerHTML =`<div>${puntuacionTotal.score}/10</div>`;
 }
 
 //GRÁFICA
