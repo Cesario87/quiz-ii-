@@ -62,27 +62,30 @@ async function nextQuestion(pregunta,num) {
      
 }
 
+
 function validar(pregunta,num) {
         
         document.querySelector('#espacioTotal').addEventListener('change', function (event) {
 
         event.preventDefault()
-        console.log(event);
+        console.log(event.target.value);
 
         
-        
-        let selected = document.querySelector(`input[name="${[num]}"]:checked`)
-        let counter = 0
-        console.log("selected_value", selected.value);
-        console.log(pregunta.correct_answer,'correct');
+        console.log("Estoy por "+num);
+        let selected = event.target.value;
+        var counter = 0
+        //console.log("selected_value", selected);
+
+        //console.log(document.querySelector(`input[name="${num}"]:checked`).value);
+       // console.log(pregunta.correct_answer,'correct');
         if (!selected) {
             alert('Selecciona una opción')
             
-        }else if (selected.value == pregunta.correct_answer) {
+        }else if (selected == pregunta.correct_answer) {
            counter++
         }
         console.log(counter)
-        
+        //falta sumar contadores preguntas y que deje de dar error */ 
     }) 
         
         
