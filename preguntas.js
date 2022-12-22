@@ -69,10 +69,10 @@ if (document.title == 'Hoja de preguntas') {
           document.querySelector('#espacioTotal').addEventListener('change', function (event) {
           
           event.preventDefault()
-          console.log(event.target.value);
+          //console.log(event.target.value);
           let counter = 0
           
-          console.log("Estoy por "+num);
+          //console.log("Estoy por "+ num);
           let selected = event.target.value;
           
           if (!selected) {
@@ -88,12 +88,23 @@ if (document.title == 'Hoja de preguntas') {
                 "user",
                 JSON.stringify({
                   'score': puntuacion,
-                  'fecha': today,
+                  'date': today,
                 })
-              );
+              ); 
+
+              /*  let user = {
+                'score': puntuacion,
+                'fecha': today,
+              }
+
+              let arrayDatos = []
+              localStorage.setItem('Datos partida', JSON.stringify(arrayDatos))
+              let arrayGuardado = JSON.parse(localStorage.getItem("Datos partida"));
+              arrayGuardado.push(user);
+              localStorage.setItem("Datos partida", JSON.stringify(arrayGuardado)); */
           }
-          console.log(counter, '1');
-          console.log(puntuacion, 'puntuacion');
+          //console.log(counter, '1');
+          //console.log(puntuacion, 'puntuacion');
       }) 
       return puntuacion  
   } 
@@ -108,26 +119,25 @@ if (document.title == 'Hoja de preguntas') {
         }
   }
   
-  if(document.title == 'Results'){
-    let puntuacionTotal = JSON.parse(localStorage.getItem("user"))
-    document.getElementById('datosguardados').innerHTML =`<div>${puntuacionTotal.score}/10</div>`;
-  }
-
-
 //GRÁFICA
- /*  async function getRecords() {
-        let results = await fetch("https://swapi.dev/api/people/");
-        let charactersData = await results.json();
-        const charactersList = charactersData.results;
-        let arrNames = charactersList.map(element => element = element.name);
-        let arrNumFilms = charactersList.map(element => element.films.length);
+if (document.title == "Results"){
+  let puntuacionTotal = JSON.parse(localStorage.getItem("user"))
+  document.getElementById('datosguardados').innerHTML =`<div>${puntuacionTotal.score}/10</div>`;
+
+        let arrPuntuaciones = []
+        arrPuntuaciones.push(puntuacionTotal.score);
+        let arrFechas = []
+        let fechas = puntuacionTotal.date
+        fechas =fechas.substring(0,4)
+        fechas =  parseInt(fechas)
+        arrFechas.push(fechas)
         
         new Chartist.Bar('#puntuaciones', {
-          labels: arrNames,
-          series: [arrNumFilms]
+          labels: [arrFechas],
+          series: [[arrPuntuaciones]]
         }, {
           width: 250,
-          height: 350,
+          height: 150,
           horizontalBars: true,
           axisY: {
             onlyInteger: true,
@@ -142,7 +152,11 @@ if (document.title == 'Hoja de preguntas') {
             });
           }
         });
+
+      //Lo siguiente hace un clear del local storage, lo cuál sólo sirve si no queremos hacer registro de varios (sólo uno)-TEMPORAL
+      const botonDelete = document.querySelector("#btnResults")
+      botonDelete.onclick = ()=> {
+        localStorage.clear() 
+        window.location.href='./index.html'}
       }
-      getRecords()
- 
-   */ 
+   

@@ -56,18 +56,16 @@ div {
 }
 
 /*HOME/RESULTS*/
-#start {
+#start{
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 
-
-
 h1 {
     color: white;
     font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
-    font-size: 250%;
+    font-size: 150%;
 }
 
 #centrarResultados{
@@ -75,8 +73,6 @@ h1 {
     flex-direction: column;
     align-items: center;
 }
-
-#datosguardados
 
 #btnStart {
     background-color: rgb(76, 113, 233);
@@ -96,22 +92,23 @@ h1 {
     padding: 2% 6%;
     margin-top: 15%;
     position: sticky;
-    
-    margin-left: 0%;
 }
 
-/*#cuadroResultados{
+#datosguardados{
     border: solid black;
-    
-}*/
+    border-style: dotted;
+    padding: 5%;
+    font-size: 300%;
+    background-color: rgb(224, 190, 102);
+}
 
 input:hover{
     cursor:pointer;
 }
 
-#SWCharacters .ct-series-a .ct-bar {
+#puntuaciones .ct-series-a .ct-bar {
     /* Colour of your bars */
-    stroke: rgb(249, 82, 82);
+    stroke: rgb(248, 13, 13);
   }
 
 @media screen and (min-width: 768px) and (max-width:1366px) {
