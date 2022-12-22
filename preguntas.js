@@ -64,12 +64,19 @@ async function nextQuestion(pregunta,num) {
        /*  if (!selected) {
             alert('Selecciona una opción')
             
-        }else  */if (selected.value == pregunta.correct_answer) {
-           counter++
-        }
+        }else  if (selected.value == pregunta.correct_answer) {
+           
+        }*/
+        counter++
         console.log(counter,'counter')
-    }) 
-}
+//PANTALLA DE RESULTADOS:
+/*if(num == 10)
+window.open("./results");
+    }
+    
+    document.querySelector('#cuadroResultados').innerHTML = counter + "/10"
+     */
+})
 
 function mezclarArray(arr) {
     
@@ -81,3 +88,4 @@ function mezclarArray(arr) {
       }
 
 
+    }
