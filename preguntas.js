@@ -62,7 +62,7 @@ async function nextQuestion(pregunta,num) {
      
 }
 
-let puntuacion
+let puntuacion = 0
 
 function validar(pregunta,num) {
     
@@ -80,18 +80,17 @@ function validar(pregunta,num) {
             
         }else if (selected == pregunta.correct_answer) {
             counter++ 
-            return counter
-           
+            puntuacion =  puntuacion + counter
         }
         console.log(counter, '1');
         //falta sumar contadores preguntas
     }) 
    
     
+    return puntuacion
         
 } 
 
-console.log(puntuacion, '3');
 
 
 
