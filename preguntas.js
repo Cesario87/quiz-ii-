@@ -12,7 +12,12 @@ async function init(){
     nextQuestion(pregunta[num],num)
     num = 1
     console.log(pregunta);
-    document.querySelector('#btn').addEventListener('click',()=> {
+    
+    document.querySelector('#btn').addEventListener('click', ()=> {
+        /* event.preventDefault()
+        console.log(event);
+        validar(pregunta[num],num) */
+        
         nextQuestion(pregunta[num],num)
         num++
     })
@@ -24,7 +29,7 @@ async function nextQuestion(pregunta,num) {
     
     let espacio = document.querySelector('#espacioPregunta')
     let opciones = document.querySelector('#opciones')
-    console.log(num);
+    //console.log(num);
     
    espacio.innerHTML = `<div>
    <legend id='legend${num}'>${pregunta.question}</legend>
@@ -36,7 +41,7 @@ async function nextQuestion(pregunta,num) {
     arrMezcla = correcta.concat(incorrectas)
   
     mezclarArray(arrMezcla)
-    console.log(arrMezcla);
+    //console.log(arrMezcla);
     
     
     let imprimir2 = ''
@@ -44,32 +49,50 @@ async function nextQuestion(pregunta,num) {
     for (let j = 0; j < arrMezcla.length; j++) {
         imprimir2 +=`<div>
         <label for="radio${j}">${arrMezcla[j]}</label>
-        <input type="radio" id="radio${j}" name="${num}" value="${arrMezcla[j]}"> 
+        <input type="radio" id="radio${num+j}" name="${num}" value="${arrMezcla[j]}"> 
         </div>` 
 
     }
 
     opciones.innerHTML = imprimir2
 
-
-    document.querySelector('#btn').addEventListener('click', function (event) {
-
-        event.preventDefault()
-        console.log(event);
-        console.log("num", num);
+    validar(pregunta,num)  
         
-        let selected = document.querySelector(`input[name="${num}"]:checked`)
+
+     
+}
+
+let puntuacion = 0
+
+function validar(pregunta,num) {
+    
+        document.querySelector('#espacioTotal').addEventListener('change', function (event) {
+        
+        event.preventDefault()
+        console.log(event.target.value);
         let counter = 0
-        console.log(counter,'counter');
-       /*  if (!selected) {
+        
+        console.log("Estoy por "+num);
+        let selected = event.target.value;
+        
+        if (!selected) {
             alert('Selecciona una opción')
             
-        }else  */if (selected.value == pregunta.correct_answer) {
-           counter++
+        }else if (selected == pregunta.correct_answer) {
+            counter++ 
+            puntuacion =  puntuacion + counter
         }
-        console.log(counter,'counter')
+        console.log(counter, '1');
+        //falta sumar contadores preguntas
     }) 
-}
+   
+    
+    return puntuacion
+        
+} 
+
+
+
 
 function mezclarArray(arr) {
     
@@ -77,7 +100,7 @@ function mezclarArray(arr) {
           const s = Math.floor(Math.random() * (i + 1));
           [arr[i], arr[s]] = [arr[s], arr[i]];
           
-        }
-      }
+    }
+}
 
 
