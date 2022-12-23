@@ -31,9 +31,9 @@ async function nextQuestion(pregunta,num) {
 
     if(num < 10){
     
-   espacio.innerHTML = `<div>
-   <legend id='legend${num}'>${pregunta.question}</legend>
-   </div>` 
+    espacio.innerHTML = `<div>
+    <legend id='legend${num}'>${pregunta.question}</legend>
+    </div>` 
 
     let arrMezcla = []
     correcta = [pregunta.correct_answer]
@@ -114,7 +114,7 @@ if(document.title == 'Results'){
 }
 
 //GRÁFICA
- /*  async function getRecords() {
+/*  async function getRecords() {
         let results = await fetch("https://swapi.dev/api/people/");
         let charactersData = await results.json();
         const charactersList = charactersData.results;
@@ -143,5 +143,5 @@ if(document.title == 'Results'){
         });
       }
       getRecords()
- 
+      
    */ 
