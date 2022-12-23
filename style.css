@@ -1,8 +1,164 @@
-#espacioPregunta {
+body {
+    background-color: rgb(158, 200, 232);
+}
+
+main {
     display: flex;
     flex-direction: column;
     align-items: center;
-    border: solid black;
+    margin-top: 10%;
 
-    font-size: xx-large;
+}
+
+#espacioTotal {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border: solid rgb(0, 2, 2);
+    border-width: 5px;
+
+    height: 90vh;
+    width: 90%;
+    font-size: 4vh;
+    font-weight: bolder;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    background-image: linear-gradient(rgb(107, 121, 224), rgb(255, 255, 250));
+}
+
+#espacioPregunta {
+    height: 30%;
+    font-style: italic;
+    margin: 3% 5% 0%;
+}
+
+#opciones {
+    margin-top: 20%;
+    margin-bottom: 10%;
+    margin-left: 5%;
+
+
+    font-size: 4vh;
+}
+
+div {
+    margin-bottom: 5%;
+}
+
+#btn {
+    background-color: rgb(76, 113, 233);
+    font-weight: bolder;
+    color: white;
+    font-size: 80%;
+    padding: 0% 7%;
+    border-width: 5px;
+    position: sticky;
+    margin-top: 5%;
+}
+
+/*HOME/RESULTS*/
+#start {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#results{
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    margin-left: 15%;
+}
+
+h1 {
+    color: white;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-size: 250%;
+}
+
+#btnStart {
+    background-color: rgb(76, 113, 233);
+    font-weight: bolder;
+    color: white;
+    font-size: 150%;
+    padding: 20% 50%;
+    border-width: 5px;
+    margin-top: 2%;
+}
+
+#btnResults{
+    background-color: rgb(76, 113, 233);
+    font-weight: bolder;
+    color: white; 
+    font-size: 150%;
+    padding: 2% 6%;
+    margin-top: 15%;
+    position: sticky;
+    
+    margin-top: 90%;
+    margin-left: 25%;
+}
+
+#cuadroResultados{
+    border: solid black;
+    
+}
+
+input:hover{
+    cursor:pointer;
+}
+
+#SWCharacters .ct-series-a .ct-bar {
+    /* Colour of your bars */
+    stroke: rgb(249, 82, 82);
+  }
+
+@media screen and (min-width: 768px) and (max-width:1366px) {
+    #espacioPregunta {
+        margin: 3% 3% 1%;
+        font-size: 60px;
+    }
+
+    #opciones {
+        margin-top: 5%;
+        margin-bottom: 0%;
+        margin-left: 5%;
+
+
+        font-size: 4vh;
+    }
+
+    h1 {
+        font-size: 500%;
+    }
+    
+    #btnStart {
+        font-size: 450%;
+    }
+}
+
+@media screen and (min-width: 1266px) {
+    main {
+        margin-top: 2%;
+    }
+
+    #espacioTotal {
+        height: 50%;
+    }
+
+    #opciones {
+        margin-top: 4%;
+        margin-left: 0%;
+    }
+
+    #btn {
+        margin-bottom: 2%;
+    }
+
+    h1 {
+        font-size: 600%;
+    }
+
+    #btnStart {
+        font-size: 300%;
+    }
 }

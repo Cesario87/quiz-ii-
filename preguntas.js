@@ -1,3 +1,7 @@
+
+if (document.title == 'Hoja de preguntas') {
+  
+
 async function getQuestions() {
     let resultado = await fetch("https://opentdb.com/api.php?amount=10");
     let dataBase = await resultado.json();
@@ -23,17 +27,20 @@ async function init(){
     })
 }
 
-
 init()
 async function nextQuestion(pregunta,num) {
     
     let espacio = document.querySelector('#espacioPregunta')
     let opciones = document.querySelector('#opciones')
     //console.log(num);
+
+
+    if(num < 10){
+
     
-   espacio.innerHTML = `<div>
-   <legend id='legend${num}'>${pregunta.question}</legend>
-   </div>` 
+    espacio.innerHTML = `<div>
+    <legend id='legend${num}'>${pregunta.question}</legend>
+    </div>` 
 
     let arrMezcla = []
     correcta = [pregunta.correct_answer]
@@ -42,7 +49,8 @@ async function nextQuestion(pregunta,num) {
   
     mezclarArray(arrMezcla)
     //console.log(arrMezcla);
-    
+
+
     
     let imprimir2 = ''
     
@@ -56,16 +64,19 @@ async function nextQuestion(pregunta,num) {
 
     opciones.innerHTML = imprimir2
 
-    
-    validar(pregunta,num)  
 
-     
+    validar(pregunta,num)  
+  }else{
+    window.open("./results.html"); 
+  }
 }
 
 let puntuacion = 0
+let today = new Date().toLocaleDateString()
 
 function validar(pregunta,num) {
-    
+  
+
         document.querySelector('#espacioTotal').addEventListener('change', function (event) {
         
         event.preventDefault()
@@ -81,17 +92,23 @@ function validar(pregunta,num) {
         }else if (selected == pregunta.correct_answer) {
             counter++ 
             puntuacion =  puntuacion + counter
+
+            
+
+            //localStorage.setItem('puntuacion',puntuacion)
+            localStorage.setItem(
+              "user",
+              JSON.stringify({
+                'score': puntuacion,
+                'fecha': today,
+              })
+            );
         }
         console.log(counter, '1');
-        //falta sumar contadores preguntas
+        console.log(puntuacion, 'puntuacion');
     }) 
-   
-    
-    return puntuacion
-        
+    return puntuacion  
 } 
-
-
 
 
 function mezclarArray(arr) {
@@ -100,7 +117,45 @@ function mezclarArray(arr) {
           const s = Math.floor(Math.random() * (i + 1));
           [arr[i], arr[s]] = [arr[s], arr[i]];
           
-    }
+
+}
 }
 
-
+if(document.title == 'Results'){
+  let puntuacionTotal = JSON.parse(localStorage.getItem("user"))
+  document.getElementById('datosguardados').innerHTML =`<div>${puntuacionTotal.score}/10</div>`;
+}
+}
+//GRÁFICA
+/*  async function getRecords() {
+        let results = await fetch("https://swapi.dev/api/people/");
+        let charactersData = await results.json();
+        const charactersList = charactersData.results;
+        let arrNames = charactersList.map(element => element = element.name);
+        let arrNumFilms = charactersList.map(element => element.films.length);
+        
+        new Chartist.Bar('#puntuaciones', {
+          labels: arrNames,
+          series: [arrNumFilms]
+        }, {
+          width: 250,
+          height: 350,
+          horizontalBars: true,
+          axisY: {
+            onlyInteger: true,
+            labelInterpolationFnc: function(value) {
+              return (value) + '';
+            }
+          }
+        }).on('draw', function(data) {
+          if(data.type === 'bar') {
+            data.element.attr({
+              style: 'stroke-width: 10px'
+            });
+          }
+        });
+      }
+      getRecords()
+      
+   */ 
+    
