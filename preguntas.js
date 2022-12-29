@@ -27,7 +27,7 @@ if (document.title == 'Hoja de preguntas') {
       
       let espacio = document.querySelector('#espacioPregunta')
       let opciones = document.querySelector('#opciones')
-      //console.log(num);
+      console.log(num);
   
       if(num < 10){
       
@@ -55,12 +55,13 @@ if (document.title == 'Hoja de preguntas') {
   
       opciones.innerHTML = imprimir2
   
-      validar(pregunta,num) 
+      
       
       
     }else{
       window.open("./results.html"); 
     }
+    validar(pregunta,num) 
   }
   
   let puntuacion = 0
@@ -94,8 +95,8 @@ if (document.title == 'Hoja de preguntas') {
               );  */ 
           }
       }) 
-      console.log(num)
-      if (num == 9) {
+      //console.log(num)
+      if (num == 10) {
         console.log(puntuacion, 'puntuacion')
 
       let user = {
@@ -105,21 +106,18 @@ if (document.title == 'Hoja de preguntas') {
         
         let nuevoDato = JSON.parse(localStorage.getItem("partida")) || [] ;
   
-        console.log(nuevoDato, '1')
+        //console.log(nuevoDato, '1')
         
         nuevoDato.unshift(user);
         
-        console.log(nuevoDato,'2')
-    
+        //console.log(nuevoDato,'2') 
         arrayDatos = JSON.stringify(nuevoDato)
         localStorage.setItem('partida',arrayDatos)
       }
       
-    
-
+      
     return puntuacion  
   } 
-
   
   
   function mezclarArray(arr) {
@@ -136,7 +134,7 @@ if (document.title == 'Hoja de preguntas') {
 if (document.title == "Results"){
   let puntuacionTotal = JSON.parse(localStorage.getItem("partida"))
   console.log(puntuacionTotal)
-  //document.getElementById('datosguardados').innerHTML =`<div>${puntuacionTotal[0].score}/10</div>`;
+  document.getElementById('datosguardados').innerHTML =`<div>${puntuacionTotal[0].score}/10</div>`;
 /* 
         let arrPuntuaciones = []
         arrPuntuaciones.push(puntuacionTotal.score);
