@@ -31,9 +31,9 @@ if (document.title == 'Hoja de preguntas') {
   
       if(num < 10){
       
-     espacio.innerHTML = `<div>
-     <legend id='legend${num}'>${pregunta.question}</legend>
-     </div>` 
+      espacio.innerHTML = `<div>
+      <legend id='legend${num}'>${pregunta.question}</legend>
+      </div>` 
   
       let arrMezcla = []
       correcta = [pregunta.correct_answer]
@@ -55,7 +55,9 @@ if (document.title == 'Hoja de preguntas') {
   
       opciones.innerHTML = imprimir2
   
-      validar(pregunta,num)  
+      validar(pregunta,num) 
+      
+      
     }else{
       window.open("./results.html"); 
     }
@@ -63,6 +65,8 @@ if (document.title == 'Hoja de preguntas') {
   
   let puntuacion = 0
   let today = new Date().toLocaleDateString()
+  /* let arrayDatos = []
+  localStorage.setItem('partida', JSON.stringify(arrayDatos)) */
   
   function validar(pregunta,num) {
     
@@ -81,33 +85,42 @@ if (document.title == 'Hoja de preguntas') {
           }else if (selected == pregunta.correct_answer) {
               counter++ 
               puntuacion =  puntuacion + counter
-              
-  
-              //localStorage.setItem('puntuacion',puntuacion)
-              localStorage.setItem(
+              /*    localStorage.setItem(
                 "user",
                 JSON.stringify({
                   'score': puntuacion,
                   'date': today,
                 })
-              ); 
-
-              /*  let user = {
-                'score': puntuacion,
-                'fecha': today,
-              }
-
-              let arrayDatos = []
-              localStorage.setItem('Datos partida', JSON.stringify(arrayDatos))
-              let arrayGuardado = JSON.parse(localStorage.getItem("Datos partida"));
-              arrayGuardado.push(user);
-              localStorage.setItem("Datos partida", JSON.stringify(arrayGuardado)); */
+              );  */ 
           }
-          //console.log(counter, '1');
-          //console.log(puntuacion, 'puntuacion');
       }) 
-      return puntuacion  
+      console.log(num)
+      if (num == 9) {
+        console.log(puntuacion, 'puntuacion')
+
+      let user = {
+        'score': puntuacion,
+        'date': today,
+        }
+        
+        let nuevoDato = JSON.parse(localStorage.getItem("partida")) || [] ;
+  
+        console.log(nuevoDato, '1')
+        
+        nuevoDato.unshift(user);
+        
+        console.log(nuevoDato,'2')
+    
+        arrayDatos = JSON.stringify(nuevoDato)
+        localStorage.setItem('partida',arrayDatos)
+      }
+      
+    
+
+    return puntuacion  
   } 
+
+  
   
   function mezclarArray(arr) {
       
@@ -121,14 +134,15 @@ if (document.title == 'Hoja de preguntas') {
   
 //GRÁFICA
 if (document.title == "Results"){
-  let puntuacionTotal = JSON.parse(localStorage.getItem("user"))
-  document.getElementById('datosguardados').innerHTML =`<div>${puntuacionTotal.score}/10</div>`;
-
+  let puntuacionTotal = JSON.parse(localStorage.getItem("partida"))
+  console.log(puntuacionTotal)
+  //document.getElementById('datosguardados').innerHTML =`<div>${puntuacionTotal[0].score}/10</div>`;
+/* 
         let arrPuntuaciones = []
         arrPuntuaciones.push(puntuacionTotal.score);
         let arrFechas = []
         let fechas = puntuacionTotal.date
-        fechas =fechas.substring(0,4)
+        fechas = fechas.substring(0,4)
         fechas =  parseInt(fechas)
         arrFechas.push(fechas)
         
@@ -151,7 +165,7 @@ if (document.title == "Results"){
               style: 'stroke-width: 10px'
             });
           }
-        });
+        }); */
 
       //Lo siguiente hace un clear del local storage, lo cuál sólo sirve si no queremos hacer registro de varios (sólo uno)-TEMPORAL
       const botonDelete = document.querySelector("#btnResults")
