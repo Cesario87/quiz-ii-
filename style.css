@@ -1,12 +1,12 @@
 body {
-    background-color: rgb(158, 200, 232);
+    background-color: linear-gradient(rgb(107, 121, 224), rgb(255, 255, 250));
 }
 
 main {
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-top: 10%;
+    margin-top: 8%;
 
 }
 
@@ -14,19 +14,17 @@ main {
     display: flex;
     flex-direction: column;
     align-items: center;
-    border: solid rgb(0, 2, 2);
-    border-width: 5px;
 
-    height: 90vh;
+    height: 80vh;
     width: 90%;
-    font-size: 4vh;
+    font-size: 2em;
     font-weight: bolder;
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
     background-image: linear-gradient(rgb(107, 121, 224), rgb(255, 255, 250));
 }
 
 #espacioPregunta {
-    height: 30%;
+    height: 50%;
     font-style: italic;
     margin: 3% 5% 0%;
 }
@@ -35,9 +33,9 @@ main {
     margin-top: 20%;
     margin-bottom: 3%;
     margin-left: 5%;
-
-
-    font-size: 4vh;
+    height: 50%;
+    font-size: 1em;
+    border-width: 5px black;
 }
 
 div {
@@ -48,11 +46,11 @@ div {
     background-color: rgb(76, 113, 233);
     font-weight: bolder;
     color: white;
-    font-size: 80%;
-    padding: 0% 7%;
+    font-size: 150%;
+    padding: 5%;
     border-width: 5px;
-    position: sticky;
     margin-top: 5%;
+    border-radius: 15%;
 }
 
 /*HOME/RESULTS*/
@@ -65,7 +63,7 @@ div {
 h1 {
     color: white;
     font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
-    font-size: 150%;
+    
 }
 
 #centrarResultados{
@@ -78,7 +76,7 @@ h1 {
     background-color: rgb(76, 113, 233);
     font-weight: bolder;
     color: white;
-    font-size: 150%;
+    font-size: 2em;
     padding: 20% 50%;
     border-width: 5px;
     margin-top: 2%;
@@ -92,6 +90,7 @@ h1 {
     padding: 2% 6%;
     margin-top: 15%;
     position: sticky;
+    
 }
 
 #datosguardados{
@@ -109,7 +108,7 @@ input:hover{
 #puntuaciones .ct-series-a .ct-bar {
     /* Colour of your bars */
     stroke: rgb(248, 13, 13);
-  }
+    }
 
 @media screen and (min-width: 768px) and (max-width:1366px) {
     #espacioPregunta {
@@ -121,8 +120,6 @@ input:hover{
         margin-top: 5%;
         margin-bottom: 0%;
         margin-left: 5%;
-
-
         font-size: 4vh;
     }
 
