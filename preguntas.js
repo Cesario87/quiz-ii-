@@ -1,5 +1,4 @@
 if (document.title == "Hoja de preguntas") {
-if (document.title == "Hoja de preguntas") {
   async function getQuestions() {
     let resultado = await fetch("https://opentdb.com/api.php?amount=10");
     let dataBase = await resultado.json();
@@ -17,6 +16,7 @@ if (document.title == "Hoja de preguntas") {
     document.querySelector("#btn").addEventListener("click", () => {
       nextQuestion(pregunta[num], num);
       num++;
+      //console.log(num,'num++')
     });
   }
 
@@ -24,7 +24,7 @@ if (document.title == "Hoja de preguntas") {
   async function nextQuestion(pregunta, num) {
     let espacio = document.querySelector("#espacioPregunta");
     let opciones = document.querySelector("#opciones");
-    console.log(num);
+    //console.log(num,'27');
 
     if (num <= 9) {
       espacio.innerHTML = `<div>
@@ -41,25 +41,19 @@ if (document.title == "Hoja de preguntas") {
 
       let imprimir2 = "";
 
-
-      let imprimir2 = "";
-
       for (let j = 0; j < arrMezcla.length; j++) {
-
-        imprimir2 += `<div id="separacionLabels">
+        imprimir2 += `<div>
           <input type="radio" id="radio${num + j}" name="${num}" value="${
           arrMezcla[j]
         }"> 
-          <label for="radio${num + j}">${arrMezcla[j]}</label>
+          <label for="radio${num +j}">${arrMezcla[j]}</label>
           </div>`;
       }
 
       opciones.innerHTML = imprimir2;
     } else {
-
       window.location.href = "./results.html";
     }
-    validar(pregunta, num);
     validar(pregunta, num);
   }
 
@@ -105,20 +99,13 @@ if (document.title == "Hoja de preguntas") {
       arrayDatos = JSON.stringify(nuevoDato);
       localStorage.setItem("partida", arrayDatos);
 
-      //guardarPartida(today,puntuacion)
+      guardarPartida(today,puntuacion)
     }
 
     //return puntuacion;
   }
 
   function mezclarArray(arr) {
-    for (let i = arr.length - 1; i >= 0; i--) {
-      const s = Math.floor(Math.random() * (i + 1));
-      [arr[i], arr[s]] = [arr[s], arr[i]];
-    }
-  }
-}
-
     for (let i = arr.length - 1; i >= 0; i--) {
       const s = Math.floor(Math.random() * (i + 1));
       [arr[i], arr[s]] = [arr[s], arr[i]];
@@ -183,3 +170,41 @@ if (document.title == "Results") {
     window.location.href = "./index.html";
   };
 }
+/*
+//FIREBASE
+const firebaseConfig = {
+  apiKey: "AIzaSyDn9yTVECEBbcGdVrHFSsq52iWlucrlCUc",
+  authDomain: "quiz-ii-61c29.firebaseapp.com",
+  projectId: "quiz-ii-61c29",
+  storageBucket: "quiz-ii-61c29.appspot.com",
+  messagingSenderId: "809325604160",
+  appId: "1:809325604160:web:b972fa210671931f6a5ea5"
+};
+
+firebase.initializeApp(firebaseConfig);// Inicializaar app Firebase
+
+const db = firebase.firestore();// db representa mi BBDD //inicia Firestore
+
+
+function guardarPartida(today,puntuacion) {
+  return db.collection("score").add({
+    date: today,
+    score: puntuacion,
+    
+  })
+  .then((docRef) => {
+    console.log("Document written with ID: ", docRef.id);
+  })
+  .catch((error) => {
+    console.error("Error adding document: ", error);
+  });
+}
+
+function obtenerPartida() {
+  db.collection("score").get().then((querySnapshot) => {
+    querySnapshot.forEach((doc) => {
+        console.log(`${doc.id} => ${doc.data()}`);//arrays graficas
+    });
+});
+}
+*/
