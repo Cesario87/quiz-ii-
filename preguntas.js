@@ -25,7 +25,7 @@ if (document.title == "Hoja de preguntas") {
     let opciones = document.querySelector("#opciones");
     console.log(num);
 
-    if (num < 10) {
+    if (num <= 9) {
       espacio.innerHTML = `<div>
       <legend id='legend${num}'>${pregunta.question}</legend>
       </div>`;
@@ -41,17 +41,17 @@ if (document.title == "Hoja de preguntas") {
       let imprimir2 = "";
 
       for (let j = 0; j < arrMezcla.length; j++) {
-        imprimir2 += `<div>
+        imprimir2 += `<div id="separacionLabels">
           <input type="radio" id="radio${num + j}" name="${num}" value="${
           arrMezcla[j]
         }"> 
-          <label for="radio${j}">${arrMezcla[j]}</label>
+          <label for="radio${num + j}">${arrMezcla[j]}</label>
           </div>`;
       }
 
       opciones.innerHTML = imprimir2;
     } else {
-      window.open("./results.html");
+      window.location.href = "./results.html";
     }
     validar(pregunta, num);
   }
@@ -72,23 +72,17 @@ if (document.title == "Hoja de preguntas") {
         //console.log("Estoy por "+ num);
         let selected = event.target.value;
 
-        if (!selected) {
-          alert("Selecciona una opción");
-        } else if (selected == pregunta.correct_answer) {
-          counter++;
-          puntuacion = puntuacion + counter;
-          /*    localStorage.setItem(
-                "user",
-                JSON.stringify({
-                  'score': puntuacion,
-                  'date': today,
-                })
-              );  */
-        }
+        if (selected === pregunta.correct_answer) {
+          puntuacion++;
+          //console.log(counter,'counter')
+          //console.log(puntuacion,'puntuacion')
+                  }
       });
     //console.log(num)
+    console.log(puntuacion, "puntuacion");
+
     if (num == 10) {
-      console.log(puntuacion, "puntuacion");
+      //console.log(puntuacion, "puntuacion");
 
       let user = {
         score: puntuacion,
@@ -143,7 +137,7 @@ if (document.title == "Results") {
         series: [arrPuntuaciones],
       },
       {
-        width: 950,
+        width: 350,
         height: 250,
         horizontalBars: true,
         //seriesBarDistance: 5,
