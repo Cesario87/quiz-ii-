@@ -52,7 +52,7 @@ if (document.title == "Hoja de preguntas") {
 
       opciones.innerHTML = imprimir2;
     } else {
-      window.open("./results.html");
+      window.location.href = "./results.html";
     }
     validar(pregunta, num);
   }
@@ -74,8 +74,8 @@ if (document.title == "Hoja de preguntas") {
         let selected = event.target.value;
 
         if (selected === pregunta.correct_answer) {
-          puntuacion = puntuacion + 1
-          //console.log(counter,'counter')
+          puntuacion++
+          
           console.log(puntuacion,'puntuacion')
           
         }
@@ -102,7 +102,7 @@ if (document.title == "Hoja de preguntas") {
       guardarPartida(today,puntuacion)
     }
 
-    return puntuacion;
+    //return puntuacion;
   }
 
   function mezclarArray(arr) {
@@ -139,7 +139,7 @@ if (document.title == "Results") {
         series: [arrPuntuaciones],
       },
       {
-        width: 950,
+        width: 350,
         height: 250,
         horizontalBars: true,
         //seriesBarDistance: 5,
@@ -180,6 +180,7 @@ const firebaseConfig = {
   messagingSenderId: "809325604160",
   appId: "1:809325604160:web:b972fa210671931f6a5ea5"
 };
+
 firebase.initializeApp(firebaseConfig);// Inicializaar app Firebase
 
 const db = firebase.firestore();// db representa mi BBDD //inicia Firestore
@@ -199,7 +200,7 @@ function guardarPartida(today,puntuacion) {
   });
 }
 
-function obtenerPartida(params) {
+function obtenerPartida() {
   db.collection("score").get().then((querySnapshot) => {
     querySnapshot.forEach((doc) => {
         console.log(`${doc.id} => ${doc.data()}`);//arrays graficas
