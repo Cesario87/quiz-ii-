@@ -1,4 +1,5 @@
 if (document.title == "Hoja de preguntas") {
+if (document.title == "Hoja de preguntas") {
   async function getQuestions() {
     let resultado = await fetch("https://opentdb.com/api.php?amount=10");
     let dataBase = await resultado.json();
@@ -40,7 +41,11 @@ if (document.title == "Hoja de preguntas") {
 
       let imprimir2 = "";
 
+
+      let imprimir2 = "";
+
       for (let j = 0; j < arrMezcla.length; j++) {
+
         imprimir2 += `<div id="separacionLabels">
           <input type="radio" id="radio${num + j}" name="${num}" value="${
           arrMezcla[j]
@@ -51,8 +56,10 @@ if (document.title == "Hoja de preguntas") {
 
       opciones.innerHTML = imprimir2;
     } else {
+
       window.location.href = "./results.html";
     }
+    validar(pregunta, num);
     validar(pregunta, num);
   }
 
@@ -67,22 +74,21 @@ if (document.title == "Hoja de preguntas") {
       .addEventListener("change", function (event) {
         event.preventDefault();
         //console.log(event.target.value);
-        let counter = 0;
+        //let counter = 0;
 
         //console.log("Estoy por "+ num);
         let selected = event.target.value;
 
         if (selected === pregunta.correct_answer) {
-          puntuacion++;
-          //console.log(counter,'counter')
-          //console.log(puntuacion,'puntuacion')
-                  }
+          puntuacion++
+          
+          console.log(puntuacion,'puntuacion')
+          
+        }
       });
     //console.log(num)
-    console.log(puntuacion, "puntuacion");
-
     if (num == 10) {
-      //console.log(puntuacion, "puntuacion");
+      console.log(puntuacion, "puntuacion num10");
 
       let user = {
         score: puntuacion,
@@ -98,12 +104,21 @@ if (document.title == "Hoja de preguntas") {
       //console.log(nuevoDato,'2')
       arrayDatos = JSON.stringify(nuevoDato);
       localStorage.setItem("partida", arrayDatos);
+
+      //guardarPartida(today,puntuacion)
     }
 
-    return puntuacion;
+    //return puntuacion;
   }
 
   function mezclarArray(arr) {
+    for (let i = arr.length - 1; i >= 0; i--) {
+      const s = Math.floor(Math.random() * (i + 1));
+      [arr[i], arr[s]] = [arr[s], arr[i]];
+    }
+  }
+}
+
     for (let i = arr.length - 1; i >= 0; i--) {
       const s = Math.floor(Math.random() * (i + 1));
       [arr[i], arr[s]] = [arr[s], arr[i]];
