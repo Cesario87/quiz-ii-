@@ -11,6 +11,9 @@ firebase.initializeApp(firebaseConfig);// Inicializaar app Firebase
 
 const db = firebase.firestore();// db representa mi BBDD //inicia Firestore
 
+// Initialize Firebase Authentication and get a reference to the service
+const auth = firebase.auth();
+
 
 if (document.title == "Hoja de preguntas") {
   async function getQuestions() {
@@ -281,5 +284,66 @@ if (document.title == "Results") {
   }; 
 
 
+
+}
+
+if (document.title =='Login') {
+  
+  const signInForm = document.querySelector('#sign-form');
+
+  signInForm.addEventListener("submit", (e) => {
+    e.preventDefault();
+
+    const email = document.querySelector("#sign-email").value;
+    const password = document.querySelector("#sign-pass").value;
+
+    auth
+        .createUserWithEmailAndPassword(email, password)
+        .then(userCredential => {
+            signInForm.reset();
+
+            console.log('sign in');
+        })
+});
+
+//Log In 
+
+  const logInForm = document.querySelector("#login-form");
+
+  logInForm.addEventListener("submit", (e)=> {
+    e.preventDefault();
+
+    const email = document.querySelector("#login-email").value;
+    const password = document.querySelector("#login-pass").value;
+
+    auth
+        .signInWithEmailAndPassword(email, password)
+        .then(userCredential => {
+            signInForm.reset();
+
+            console.log('log in');
+        })
+})
+
+//Log Out
+const logOut = document.querySelector("#log_out");
+
+logOut.addEventListener("click", e => {
+    e.preventDefault();
+    auth
+        .signOut()
+        .then(() => {
+            console.log('log out');
+        })
+})
+
+auth.onAuthStateChanged(user => {
+  if(user){
+      console.log('auth: log in');
+      
+  }else{
+      console.log('log out');
+  }
+})
 
 }

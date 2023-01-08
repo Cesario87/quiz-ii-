@@ -185,19 +185,39 @@ input:hover {
     }
 
     #opciones {
-        margin-top: 5%;
-        margin-bottom: 0%;
-        margin-left: 5%;
-        font-size: 4vh;
+        font-size: 3vh;
+    }
+
+    label {
+        width: 700px;
+        margin-bottom: 2%;
     }
 
     h1 {
         font-size: 500%;
     }
 
+    h2{
+        font-size: 500%;
+    }
+
+    #btn {
+        padding: 5% 50%;
+        font-size: 250%;
+    }
+
     #btnStart {
         font-size: 450%;
     }
+
+    #datosguardados {
+        font-size: 450%;
+    }
+
+    #btnResults {
+        font-size: 250%;
+    }
+
 }
 
 @media screen and (min-width: 1266px) {
@@ -232,4 +252,10 @@ input:hover {
     #btnStart {
         font-size: 300%;
     }
+}
+
+/* FORMULARIO FIREBASE */
+
+.login{
+    display: flex;
 }
