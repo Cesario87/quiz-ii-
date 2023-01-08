@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -9,23 +8,25 @@
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="//cdn.jsdelivr.net/chartist.js/latest/chartist.min.css">
 </head>
-
-<body id="start">
+<body id="start" class="fondoAzul">
     <header>
         <h1>QUIZ TIME!</h1>
     </header>
-    <main>
+    <main id="formatoStart">
         <div id="start">
-            <input type="button" id='btnStart' value="Start!" onclick="window.location.href='./question.html';">
+            <input type="button" id='btnStart'value="New game" onclick="window.location.href='./question.html';">
         </div>
-        <div>
-            <input type="button" id='btnStart' value="Check scores" onclick="window.location.href='./results.html';">
+        <div id="start">
+            <input type="button" id='btnStart' value="Ranking" onclick="window.location.href='./results.html';">
         </div>
     </main>
     <footer></footer>
-
+    <!-- FIREBASE -->
+    <script src="https://www.gstatic.com/firebasejs/8.7.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.7.1/firebase-firestore.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.7.1/firebase-auth.js"></script>
+    
     <script src="//cdn.jsdelivr.net/chartist.js/latest/chartist.min.js"></script>
     <script src="./preguntas.js"></script>
 </body>
-
 </html>

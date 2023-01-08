@@ -1,3 +1,17 @@
+const firebaseConfig = {
+  apiKey: "AIzaSyDn9yTVECEBbcGdVrHFSsq52iWlucrlCUc",
+  authDomain: "quiz-ii-61c29.firebaseapp.com",
+  projectId: "quiz-ii-61c29",
+  storageBucket: "quiz-ii-61c29.appspot.com",
+  messagingSenderId: "809325604160",
+  appId: "1:809325604160:web:b972fa210671931f6a5ea5"
+};
+
+firebase.initializeApp(firebaseConfig);// Inicializaar app Firebase
+
+const db = firebase.firestore();// db representa mi BBDD //inicia Firestore
+
+
 if (document.title == "Hoja de preguntas") {
   async function getQuestions() {
     let resultado = await fetch("https://opentdb.com/api.php?amount=10");
@@ -18,6 +32,7 @@ if (document.title == "Hoja de preguntas") {
       num++;
       //console.log(num,'num++')
     });
+  
   }
 
   init();
@@ -42,7 +57,7 @@ if (document.title == "Hoja de preguntas") {
       let imprimir2 = "";
 
       for (let j = 0; j < arrMezcla.length; j++) {
-        imprimir2 += `<div>
+        imprimir2 += `<div id="formatoRespuestas">
           <input type="radio" id="radio${num + j}" name="${num}" value="${
           arrMezcla[j]
         }"> 
@@ -51,14 +66,22 @@ if (document.title == "Hoja de preguntas") {
       }
 
       opciones.innerHTML = imprimir2;
-    } else {
-      window.location.href = "./results.html";
+    } else{
+      document.querySelector("#btn").setAttribute("value","Check your results!")
+      document.querySelector("#btn").addEventListener("click", () => {
+        
+        window.location.href = "./results.html";
+      })
+
+
+      //window.location.href = "./results.html";
     }
     validar(pregunta, num);
   }
 
   let puntuacion = 0;
-  let today = new Date().toLocaleDateString();
+  let today = new Date().toLocaleString();
+  
   /* let arrayDatos = []
   localStorage.setItem('partida', JSON.stringify(arrayDatos)) */
 
@@ -70,7 +93,7 @@ if (document.title == "Hoja de preguntas") {
         //console.log(event.target.value);
         //let counter = 0;
 
-        //console.log("Estoy por "+ num);
+        console.log("Estoy por "+ num);
         let selected = event.target.value;
 
         if (selected === pregunta.correct_answer) {
@@ -79,30 +102,38 @@ if (document.title == "Hoja de preguntas") {
           console.log(puntuacion,'puntuacion')
           
         }
+      
       });
     //console.log(num)
-    if (num == 10) {
-      console.log(puntuacion, "puntuacion num10");
+      if (num == 10) {
+        addFirestore(today, puntuacion)
 
+      };
+    
+      //Local storage
+      /* 
+      tiene que ir dentro del if 
+      console.log(puntuacion, "puntuacion num10");
+      
       let user = {
         score: puntuacion,
         date: today,
       };
-
       let nuevoDato = JSON.parse(localStorage.getItem("partida")) || [];
-
       //console.log(nuevoDato, '1')
-
       nuevoDato.unshift(user);
-
       //console.log(nuevoDato,'2')
       arrayDatos = JSON.stringify(nuevoDato);
-      localStorage.setItem("partida", arrayDatos);
-
-      guardarPartida(today,puntuacion)
-    }
-
+      localStorage.setItem("partida", arrayDatos); 
+      }
+      
+    */
+      
     //return puntuacion;
+      
+    }
+    
+    
   }
 
   function mezclarArray(arr) {
@@ -111,18 +142,97 @@ if (document.title == "Hoja de preguntas") {
       [arr[i], arr[s]] = [arr[s], arr[i]];
     }
   }
-}
 
-//GRÁFICA
-if (document.title == "Results") {
-  let puntuacionTotal = JSON.parse(localStorage.getItem("partida"));
-  console.log(puntuacionTotal);
-  document.getElementById(
-    "datosguardados"
-  ).innerHTML = `<div>${puntuacionTotal[0].score}/10</div>`;
+  function addFirestore(today, puntuacion) {
+    return db.collection("score").add({
+      
+      date: today,
+      score: puntuacion,
+      
+    })
+    .then((docRef) => {
+      console.log("Document written with ID: ", docRef.id);
+    
+      
+    })
+    .catch((error) => {
+      console.error("Error adding document: ", error);
+    });
+  }
+
   let arrFechas = [];
   let arrPuntuaciones = [];
 
+  function getFirestore() {
+      return db.collection("score").orderBy("date").get().then((querySnapshot) => {
+      querySnapshot.forEach((doc) => {
+          console.log(`${doc.id} => ${doc.data().score} => ${doc.data().date}`);
+          
+          arrPuntuaciones.push(doc.data().score);
+          let fechas = doc.data().date;
+          //fechas = fechas.substring(0, 6);
+          arrFechas.push(fechas);
+          
+
+          console.log(arrPuntuaciones);
+          console.log(arrFechas);
+
+          document.getElementById(
+            "datosguardados"
+          ).innerHTML = `<div>${doc.data().score}/10</div>`;
+      });
+      new Chartist.Bar(
+        "#puntuaciones",
+        {
+          labels: arrFechas,
+          series: [arrPuntuaciones],
+        },
+        {
+          width: 400,
+          height: 330,
+          horizontalBars: true,
+          //seriesBarDistance: 5,
+          axisX: {
+            offset: 10,
+            onlyInteger: true,
+          },
+          axisY: {
+            onlyInteger: true,
+            offset: 160,
+            labelInterpolationFnc: function (value) {
+              return value + "";
+            },
+          },
+        }
+      ).on("draw", function (data) {
+        if (data.type === "bar") {
+          data.element.attr({
+            style: "stroke-width: 10px",
+          });
+        }
+      });
+  });
+
+    
+  };
+
+//GRÁFICA
+if (document.title == "Results") {
+
+  getFirestore()
+
+  
+  
+  //Sacar puntuacion de local storage y grafica
+  /* let puntuacionTotal = JSON.parse(localStorage.getItem("partida"));
+  console.log(puntuacionTotal);
+  
+  document.getElementById(
+    "datosguardados"
+  ).innerHTML = `<div>${puntuacionTotal[0].score}/10</div>`;
+  
+  let arrFechas = [];
+  let arrPuntuaciones = [];
   for (let i = 0; i < puntuacionTotal.length; i++) {
     
     arrPuntuaciones.push(puntuacionTotal[i].score);
@@ -161,50 +271,15 @@ if (document.title == "Results") {
           style: "stroke-width: 10px",
         });
       }
-    });
+    });*/
   
-  //Lo siguiente hace un clear del local storage, lo cuál sólo sirve si no queremos hacer registro de varios (sólo uno)-TEMPORAL
+  //Lleva a home
   const botonDelete = document.querySelector("#btnResults");
   botonDelete.onclick = () => {
     //localStorage.clear()
     window.location.href = "./index.html";
-  };
+  }; 
+
+
+
 }
-/*
-//FIREBASE
-const firebaseConfig = {
-  apiKey: "AIzaSyDn9yTVECEBbcGdVrHFSsq52iWlucrlCUc",
-  authDomain: "quiz-ii-61c29.firebaseapp.com",
-  projectId: "quiz-ii-61c29",
-  storageBucket: "quiz-ii-61c29.appspot.com",
-  messagingSenderId: "809325604160",
-  appId: "1:809325604160:web:b972fa210671931f6a5ea5"
-};
-
-firebase.initializeApp(firebaseConfig);// Inicializaar app Firebase
-
-const db = firebase.firestore();// db representa mi BBDD //inicia Firestore
-
-
-function guardarPartida(today,puntuacion) {
-  return db.collection("score").add({
-    date: today,
-    score: puntuacion,
-    
-  })
-  .then((docRef) => {
-    console.log("Document written with ID: ", docRef.id);
-  })
-  .catch((error) => {
-    console.error("Error adding document: ", error);
-  });
-}
-
-function obtenerPartida() {
-  db.collection("score").get().then((querySnapshot) => {
-    querySnapshot.forEach((doc) => {
-        console.log(`${doc.id} => ${doc.data()}`);//arrays graficas
-    });
-});
-}
-*/

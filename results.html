@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="//cdn.jsdelivr.net/chartist.js/latest/chartist.min.css">
 </head> 
 
-<body id="results">
+<body id="results" class="fondoAzul">
     <header>
         
     </header>
@@ -18,19 +18,23 @@
         
         <section id="centrarResultados">
             <div id="botonn">
-                <input type="button" id='btnResults' value="HOME">
+                <input type="button" id='btnResults' value="< Home">
             </div>
-            <h1>Here are your results!</h1>
+            <h2>Here are your results!</h1>
 
             <div id="datosguardados">
             
             </div>
+            <div id="centrarGraph">
+            <div class="ct-chart ct-double-octave" id="puntuaciones">
+        </div></div>
         </section>
-        <div class="ct-chart ct-double-octave" id="puntuaciones">
-        
-        </div>
     </main>
     <footer></footer>
+    <!-- FIREBASE -->
+    <script src="https://www.gstatic.com/firebasejs/8.7.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.7.1/firebase-firestore.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.7.1/firebase-auth.js"></script>
     
     <script src="//cdn.jsdelivr.net/chartist.js/latest/chartist.min.js"></script>
     <script src="./preguntas.js"></script>
