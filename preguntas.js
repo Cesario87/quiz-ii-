@@ -66,7 +66,6 @@ if (document.title == "Hoja de preguntas") {
       }
 
       opciones.innerHTML = imprimir2;
-<<<<<<< HEAD
     } else{
       document.querySelector("#btn").setAttribute("value","Check your results!")
       document.querySelector("#btn").addEventListener("click", () => {
@@ -76,10 +75,6 @@ if (document.title == "Hoja de preguntas") {
 
 
       //window.location.href = "./results.html";
-=======
-    } else {
-      window.location.href = "./results.html";
->>>>>>> 7c0dc576562e8a1092e46dac0a3549114330fb96
     }
     validar(pregunta, num);
   }
@@ -110,13 +105,8 @@ if (document.title == "Hoja de preguntas") {
       
       });
     //console.log(num)
-<<<<<<< HEAD
       if (num == 10) {
         addFirestore(today, puntuacion)
-=======
-    if (num == 10) {
-      console.log(puntuacion, "puntuacion num10");
->>>>>>> 7c0dc576562e8a1092e46dac0a3549114330fb96
 
       };
     
@@ -134,7 +124,6 @@ if (document.title == "Hoja de preguntas") {
       nuevoDato.unshift(user);
       //console.log(nuevoDato,'2')
       arrayDatos = JSON.stringify(nuevoDato);
-<<<<<<< HEAD
       localStorage.setItem("partida", arrayDatos); 
       }
       
@@ -145,14 +134,6 @@ if (document.title == "Hoja de preguntas") {
     }
     
     
-=======
-      localStorage.setItem("partida", arrayDatos);
-
-      guardarPartida(today,puntuacion)
-    }
-
-    //return puntuacion;
->>>>>>> 7c0dc576562e8a1092e46dac0a3549114330fb96
   }
 
   function mezclarArray(arr) {
@@ -297,49 +278,8 @@ if (document.title == "Results") {
   botonDelete.onclick = () => {
     //localStorage.clear()
     window.location.href = "./index.html";
-<<<<<<< HEAD
   }; 
 
 
 
-=======
-  };
-}
-
-//FIREBASE
-const firebaseConfig = {
-  apiKey: "AIzaSyDn9yTVECEBbcGdVrHFSsq52iWlucrlCUc",
-  authDomain: "quiz-ii-61c29.firebaseapp.com",
-  projectId: "quiz-ii-61c29",
-  storageBucket: "quiz-ii-61c29.appspot.com",
-  messagingSenderId: "809325604160",
-  appId: "1:809325604160:web:b972fa210671931f6a5ea5"
-};
-
-firebase.initializeApp(firebaseConfig);// Inicializaar app Firebase
-
-const db = firebase.firestore();// db representa mi BBDD //inicia Firestore
-
-
-function guardarPartida(today,puntuacion) {
-  return db.collection("score").add({
-    date: today,
-    score: puntuacion,
-    
-  })
-  .then((docRef) => {
-    console.log("Document written with ID: ", docRef.id);
-  })
-  .catch((error) => {
-    console.error("Error adding document: ", error);
-  });
-}
-
-function obtenerPartida() {
-  db.collection("score").get().then((querySnapshot) => {
-    querySnapshot.forEach((doc) => {
-        console.log(`${doc.id} => ${doc.data()}`);//arrays graficas
-    });
-});
->>>>>>> 7c0dc576562e8a1092e46dac0a3549114330fb96
 }
