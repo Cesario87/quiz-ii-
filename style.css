@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 .fondoAzul {
     background-color: rgb(214, 233, 255);
     height: 90vh;
@@ -5,21 +6,37 @@
 
 #fondoBlanco {
     background-color: rgb(255, 255, 255);
+=======
+body {
+    background-color: linear-gradient(rgb(107, 121, 224), rgb(255, 255, 250));
+>>>>>>> 7c0dc576562e8a1092e46dac0a3549114330fb96
 }
 
 main {
     display: flex;
     flex-direction: column;
     align-items: center;
+<<<<<<< HEAD
     margin-top: 5%;
+=======
+    margin-top: 8%;
+
+>>>>>>> 7c0dc576562e8a1092e46dac0a3549114330fb96
 }
 
 #espacioTotal {
     display: flex;
     flex-direction: column;
     align-items: center;
+<<<<<<< HEAD
     height: 85vh;
     width: 95%;
+=======
+
+    height: 80vh;
+    width: 90%;
+    font-size: 2em;
+>>>>>>> 7c0dc576562e8a1092e46dac0a3549114330fb96
     font-weight: bolder;
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
     background-image: linear-gradient(rgb(111, 178, 255), rgb(255, 255, 250));
@@ -27,7 +44,11 @@ main {
 }
 
 #espacioPregunta {
+<<<<<<< HEAD
     height: auto;
+=======
+    height: 50%;
+>>>>>>> 7c0dc576562e8a1092e46dac0a3549114330fb96
     font-style: italic;
     margin: 8% 5% 5%;
     font-size: 7vw;
@@ -37,6 +58,7 @@ main {
 }
 
 #opciones {
+<<<<<<< HEAD
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -44,6 +66,14 @@ main {
     gap: 1px;
     margin: 0% 50% 0%;
     height: 60%;
+=======
+    margin-top: 20%;
+    margin-bottom: 3%;
+    margin-left: 5%;
+    height: 50%;
+    font-size: 1em;
+    border-width: 5px black;
+>>>>>>> 7c0dc576562e8a1092e46dac0a3549114330fb96
 }
 
 div {
@@ -81,6 +111,7 @@ input {
     background-color: rgb(76, 113, 233);
     font-weight: bolder;
     color: white;
+<<<<<<< HEAD
     font-size: 110%;
     padding: 5% 40%;
     border-width: 5px;
@@ -98,6 +129,13 @@ button:active {
     background-color: #3E4E8E;
     box-shadow: 0 5px #666;
     transform: translateY(4px);
+=======
+    font-size: 150%;
+    padding: 5%;
+    border-width: 5px;
+    margin-top: 5%;
+    border-radius: 15%;
+>>>>>>> 7c0dc576562e8a1092e46dac0a3549114330fb96
 }
 
 /*HOME/RESULTS*/
@@ -110,11 +148,17 @@ button:active {
 }
 
 h1 {
+<<<<<<< HEAD
     color: rgb(23, 27, 45);
     text-shadow: 0px 4px rgb(59, 85, 92);
     font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
     font-size: 50px;
     margin-bottom: 70px;
+=======
+    color: white;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    
+>>>>>>> 7c0dc576562e8a1092e46dac0a3549114330fb96
 }
 
 #centrarResultados {
@@ -128,8 +172,13 @@ h1 {
     background-color: rgb(76, 113, 233);
     font-weight: bolder;
     color: white;
+<<<<<<< HEAD
     font-size: 2.5em;
     padding: 10% 20%;
+=======
+    font-size: 2em;
+    padding: 20% 50%;
+>>>>>>> 7c0dc576562e8a1092e46dac0a3549114330fb96
     border-width: 5px;
     border-radius: 50px;
     display: inline-flex;
@@ -145,8 +194,12 @@ h1 {
     padding: 6% 20%;
     margin-top: 15%;
     position: sticky;
+<<<<<<< HEAD
     border-radius: 50px;
     display: inline-flex;
+=======
+    
+>>>>>>> 7c0dc576562e8a1092e46dac0a3549114330fb96
 }
 
 #botonn {
@@ -171,12 +224,17 @@ input:hover {
 
 #puntuaciones .ct-series-a .ct-bar {
     /* Colour of your bars */
+<<<<<<< HEAD
     stroke: rgb(63, 60, 232);
 }
 
 #centrarGraph {
     margin-right: 450px;
 }
+=======
+    stroke: rgb(248, 13, 13);
+    }
+>>>>>>> 7c0dc576562e8a1092e46dac0a3549114330fb96
 
 @media screen and (min-width: 768px) and (max-width:1366px) {
     #espacioPregunta {
