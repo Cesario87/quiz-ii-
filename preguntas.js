@@ -147,21 +147,79 @@ if (document.title == "Hoja de preguntas") {
   }
 
   function addFirestore(today, puntuacion) {
-    return db.collection("score").add({
+    let scoreArr = [];
+    let dateArr = [];
+    auth.onAuthStateChanged(user => {
+      if(user){
+          console.log('auth: log in');
+          console.log(user);
+          var scoresRef = db.collection("score");
+           
+            
+          if(scoresRef.where("email", "==", user.email)){
+            
+            scoresRef
+            .get()
+            .then(querySnapshot => {
+              querySnapshot.forEach(doc => {
+                scoreArr.push(puntuacion);
+                dateArr.push(today);
+                doc.ref.update({
+                  score : scoreArr,
+                  date: dateArr,
+                })
+              })
+            })
+            .catch((error) => {
+              console.error("Error adding document: ", error);
+            });
+          
+            
+          }else{
+             db.collection("score").add(
+            {
+            
+            email: user.email,
+            date: today,
+            score: puntuacion,
+            
+          })
+          .then((docRef) => {
+            console.log("Document written with ID: ", docRef.id);
+          
+            
+          })
+          .catch((error) => {
+            console.error("Error adding document: ", error);
+          });
+          }
+         
+          
+
+          
+      }else{
+           console.log('log out');
+          return db.collection("score").add({
       
-      date: today,
-      score: puntuacion,
-      
-    })
-    .then((docRef) => {
-      console.log("Document written with ID: ", docRef.id);
+            date: today,
+            score: puntuacion,
+            
+          })
+          .then((docRef) => {
+            console.log("Document written with ID: ", docRef.id);
+          
+            
+          })
+          .catch((error) => {
+            console.error("Error adding document: ", error);
+          })
+          
+      }})
+    }
+  
+  
     
-      
-    })
-    .catch((error) => {
-      console.error("Error adding document: ", error);
-    });
-  }
+  
 
   let arrFechas = [];
   let arrPuntuaciones = [];
@@ -337,13 +395,6 @@ logOut.addEventListener("click", e => {
         })
 })
 
-auth.onAuthStateChanged(user => {
-  if(user){
-      console.log('auth: log in');
-      
-  }else{
-      console.log('log out');
-  }
-})
+
 
 }
