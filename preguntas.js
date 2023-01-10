@@ -147,36 +147,14 @@ if (document.title == "Hoja de preguntas") {
   }
 
   function addFirestore(today, puntuacion) {
-    let scoreArr = [];
-    let dateArr = [];
+    
     auth.onAuthStateChanged(user => {
       if(user){
           console.log('auth: log in');
           console.log(user);
-          var scoresRef = db.collection("score");
-           
-            
-          if(scoresRef.where("email", "==", user.email)){
-            
-            scoresRef
-            .get()
-            .then(querySnapshot => {
-              querySnapshot.forEach(doc => {
-                scoreArr.push(puntuacion);
-                dateArr.push(today);
-                doc.ref.update({
-                  score : scoreArr,
-                  date: dateArr,
-                })
-              })
-            })
-            .catch((error) => {
-              console.error("Error adding document: ", error);
-            });
           
-            
-          }else{
-             db.collection("score").add(
+           
+          db.collection("score").add(
             {
             
             email: user.email,
@@ -192,7 +170,6 @@ if (document.title == "Hoja de preguntas") {
           .catch((error) => {
             console.error("Error adding document: ", error);
           });
-          }
          
           
 
@@ -217,63 +194,116 @@ if (document.title == "Hoja de preguntas") {
       }})
     }
   
-  
-    
-  
-
   let arrFechas = [];
   let arrPuntuaciones = [];
 
   function getFirestore() {
-      return db.collection("score").orderBy("date").get().then((querySnapshot) => {
-      querySnapshot.forEach((doc) => {
-          console.log(`${doc.id} => ${doc.data().score} => ${doc.data().date}`);
-          
-          arrPuntuaciones.push(doc.data().score);
-          let fechas = doc.data().date;
-          //fechas = fechas.substring(0, 6);
-          arrFechas.push(fechas);
-          
-
-          console.log(arrPuntuaciones);
-          console.log(arrFechas);
-
-          document.getElementById(
-            "datosguardados"
-          ).innerHTML = `<div>${doc.data().score}/10</div>`;
-      });
-      new Chartist.Bar(
-        "#puntuaciones",
-        {
-          labels: arrFechas,
-          series: [arrPuntuaciones],
-        },
-        {
-          width: 400,
-          height: 330,
-          horizontalBars: true,
-          //seriesBarDistance: 5,
-          axisX: {
-            offset: 10,
-            onlyInteger: true,
-          },
-          axisY: {
-            onlyInteger: true,
-            offset: 160,
-            labelInterpolationFnc: function (value) {
-              return value + "";
-            },
-          },
-        }
-      ).on("draw", function (data) {
-        if (data.type === "bar") {
-          data.element.attr({
-            style: "stroke-width: 10px",
+    auth.onAuthStateChanged(user => {
+      if(user){
+        return db.collection("score").where("email", "==", user.email).get().then((querySnapshot) => {
+          querySnapshot.forEach((doc) => {
+              console.log(`${doc.id} => ${doc.data().score} => ${doc.data().date}`);
+              
+              arrPuntuaciones.push(doc.data().score);
+              let fechas = doc.data().date;
+              //fechas = fechas.substring(0, 6);
+              arrFechas.push(fechas);
+              
+    
+              console.log(arrPuntuaciones);
+              console.log(arrFechas);
+    
+              document.getElementById(
+                "datosguardados"
+              ).innerHTML = `<div>${doc.data().score}/10</div>`;
           });
-        }
+          new Chartist.Bar(
+            "#puntuaciones",
+            {
+              labels: arrFechas,
+              series: [arrPuntuaciones],
+            },
+            {
+              width: 400,
+              height: 330,
+              horizontalBars: true,
+              //seriesBarDistance: 5,
+              axisX: {
+                offset: 10,
+                onlyInteger: true,
+              },
+              axisY: {
+                onlyInteger: true,
+                offset: 160,
+                labelInterpolationFnc: function (value) {
+                  return value + "";
+                },
+              },
+            }
+          ).on("draw", function (data) {
+            if (data.type === "bar") {
+              data.element.attr({
+                style: "stroke-width: 10px",
+              });
+            }
+          });
       });
-  });
+    
 
+      }else{
+        return db.collection("score").where("email", "!=", true).get().then((querySnapshot) => {
+          querySnapshot.forEach((doc) => {
+              console.log(`${doc.id} => ${doc.data().score} => ${doc.data().date}`);
+              
+              arrPuntuaciones.push(doc.data().score);
+              let fechas = doc.data().date;
+              //fechas = fechas.substring(0, 6);
+              arrFechas.push(fechas);
+              
+    
+              console.log(arrPuntuaciones);
+              console.log(arrFechas);
+    
+              document.getElementById(
+                "datosguardados"
+              ).innerHTML = `<div>${doc.data().score}/10</div>`;
+          });
+          new Chartist.Bar(
+            "#puntuaciones",
+            {
+              labels: arrFechas,
+              series: [arrPuntuaciones],
+            },
+            {
+              width: 400,
+              height: 330,
+              horizontalBars: true,
+              //seriesBarDistance: 5,
+              axisX: {
+                offset: 10,
+                onlyInteger: true,
+              },
+              axisY: {
+                onlyInteger: true,
+                offset: 160,
+                labelInterpolationFnc: function (value) {
+                  return value + "";
+                },
+              },
+            }
+          ).on("draw", function (data) {
+            if (data.type === "bar") {
+              data.element.attr({
+                style: "stroke-width: 10px",
+              });
+            }
+          });
+      });
+    
+      }
+    })
+
+      
     
   };
 
