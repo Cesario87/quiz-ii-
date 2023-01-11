@@ -1,4 +1,4 @@
-.fondoAzul {
+#fondoAzul {
     background-color: rgb(214, 233, 255);
     height: 90vh;
 }
@@ -101,7 +101,7 @@ button:active {
 }
 
 /*HOME/RESULTS*/
-#start {
+.start {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -124,7 +124,7 @@ h1 {
     justify-content: center;
 }
 
-#btnStart {
+.btnStart {
     background-color: rgb(76, 113, 233);
     font-weight: bolder;
     color: white;
@@ -206,7 +206,7 @@ input:hover {
         font-size: 250%;
     }
 
-    #btnStart {
+    .btnStart {
         font-size: 450%;
     }
 
@@ -249,7 +249,7 @@ input:hover {
         font-size: 600%;
     }
 
-    #btnStart {
+    .btnStart {
         font-size: 300%;
     }
 }

@@ -147,75 +147,203 @@ if (document.title == "Hoja de preguntas") {
   }
 
   function addFirestore(today, puntuacion) {
-    return db.collection("score").add({
-      
-      date: today,
-      score: puntuacion,
-      
-    })
-    .then((docRef) => {
-      console.log("Document written with ID: ", docRef.id);
     
-      
-    })
-    .catch((error) => {
-      console.error("Error adding document: ", error);
-    });
-  }
+    auth.onAuthStateChanged(user => {
+      if(user){
+          console.log('auth: log in');
+          console.log(user);
+          
+           
+          db.collection("score").add(
+            {
+            
+            email: user.email,
+            date: today,
+            score: puntuacion,
+            
+          })
+          .then((docRef) => {
+            console.log("Document written with ID: ", docRef.id);
+          
+            
+          })
+          .catch((error) => {
+            console.error("Error adding document: ", error);
+          });
+         
+          
 
+          
+      }else{
+           console.log('log out');
+          return db.collection("score").add({
+
+            
+            date: today,
+            score: puntuacion,
+            
+          })
+          .then((docRef) => {
+            console.log("Document written with ID: ", docRef.id);
+          
+            
+          })
+          .catch((error) => {
+            console.error("Error adding document: ", error);
+          })
+          
+      }})
+    }
+  
   let arrFechas = [];
   let arrPuntuaciones = [];
+  let arrData = [];
 
   function getFirestore() {
-      return db.collection("score").orderBy("date").get().then((querySnapshot) => {
-      querySnapshot.forEach((doc) => {
-          console.log(`${doc.id} => ${doc.data().score} => ${doc.data().date}`);
-          
-          arrPuntuaciones.push(doc.data().score);
-          let fechas = doc.data().date;
-          //fechas = fechas.substring(0, 6);
-          arrFechas.push(fechas);
-          
+    auth.onAuthStateChanged(user => {
+      if(user){
+        return db.collection("score").where("email", "==", user.email).get().then((querySnapshot) => {
+          querySnapshot.forEach((doc) => {
+            //console.log(`${doc.id} => ${doc.data().score} => ${doc.data().date}`);
+            console.log(doc.data());
 
-          console.log(arrPuntuaciones);
-          console.log(arrFechas);
+            arrData.push(doc.data());
+            
+        });
+       
+        const sortByDate = arr => {
+          const sorter = (a, b) => {
+             return new Date(b.date).getTime() - new Date(a.date).getTime();
+          }
+          arr.sort(sorter);
+       };
+       sortByDate(arrData);
+       console.log(arrData);
+        
+       arrData.forEach((data) => {
+        arrPuntuaciones.unshift(data.date)
+        arrFechas.unshift(data.score)
+       })
 
-          document.getElementById(
-            "datosguardados"
-          ).innerHTML = `<div>${doc.data().score}/10</div>`;
-      });
-      new Chartist.Bar(
-        "#puntuaciones",
-        {
-          labels: arrFechas,
-          series: [arrPuntuaciones],
-        },
-        {
-          width: 400,
-          height: 330,
-          horizontalBars: true,
-          //seriesBarDistance: 5,
-          axisX: {
-            offset: 10,
-            onlyInteger: true,
+       console.log(arrPuntuaciones);
+       console.log(arrFechas);
+        
+        
+        
+
+        //console.log(arrPuntuaciones);
+        //console.log(arrFechas);
+
+         document.getElementById(
+          "datosguardados"
+        ).innerHTML = `<div>${arrData[0].score}/10</div>`; 
+
+        new Chartist.Bar(
+          "#puntuaciones",
+          {
+            labels: arrPuntuaciones,
+            series: [arrFechas],
           },
-          axisY: {
-            onlyInteger: true,
-            offset: 160,
-            labelInterpolationFnc: function (value) {
-              return value + "";
+          {
+            width: 400,
+            height: 330,
+            horizontalBars: true,
+            //seriesBarDistance: 5,
+            axisX: {
+              offset: 10,
+              onlyInteger: true,
             },
-          },
-        }
-      ).on("draw", function (data) {
-        if (data.type === "bar") {
-          data.element.attr({
-            style: "stroke-width: 10px",
-          });
-        }
-      });
-  });
+            axisY: {
+              onlyInteger: true,
+              offset: 160,
+              labelInterpolationFnc: function (value) {
+                return value + "";
+              },
+            },
+          }
+        ).on("draw", function (data) {
+          if (data.type === "bar") {
+            data.element.attr({
+              style: "stroke-width: 10px",
+            });
+          }
+        });
+    });
+    
 
+      }else{
+        return db.collection("score").get().then((querySnapshot) => {
+          querySnapshot.forEach((doc) => {
+              //console.log(`${doc.id} => ${doc.data().score} => ${doc.data().date}`);
+              console.log(doc.data());
+
+              arrData.push(doc.data());
+              
+          });
+         
+          const sortByDate = arr => {
+            const sorter = (a, b) => {
+               return new Date(b.date).getTime() - new Date(a.date).getTime();
+            }
+            arr.sort(sorter);
+         };
+         sortByDate(arrData);
+         console.log(arrData);
+          
+         arrData.forEach((data) => {
+          arrPuntuaciones.unshift(data.date)
+          arrFechas.unshift(data.score)
+         })
+
+         console.log(arrPuntuaciones);
+         console.log(arrFechas);
+          
+          
+          
+
+          //console.log(arrPuntuaciones);
+          //console.log(arrFechas);
+
+           document.getElementById(
+            "datosguardados"
+          ).innerHTML = `<div>${arrData[0].score}/10</div>`; 
+
+          new Chartist.Bar(
+            "#puntuaciones",
+            {
+              labels: arrPuntuaciones,
+              series: [arrFechas],
+            },
+            {
+              width: 400,
+              height: 330,
+              horizontalBars: true,
+              //seriesBarDistance: 5,
+              axisX: {
+                offset: 10,
+                onlyInteger: true,
+              },
+              axisY: {
+                onlyInteger: true,
+                offset: 160,
+                labelInterpolationFnc: function (value) {
+                  return value + "";
+                },
+              },
+            }
+          ).on("draw", function (data) {
+            if (data.type === "bar") {
+              data.element.attr({
+                style: "stroke-width: 10px",
+              });
+            }
+          });
+      });
+    
+      }
+    })
+
+      
     
   };
 
@@ -337,13 +465,6 @@ logOut.addEventListener("click", e => {
         })
 })
 
-auth.onAuthStateChanged(user => {
-  if(user){
-      console.log('auth: log in');
-      
-  }else{
-      console.log('log out');
-  }
-})
+
 
 }
