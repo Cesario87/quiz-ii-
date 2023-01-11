@@ -177,7 +177,8 @@ if (document.title == "Hoja de preguntas") {
       }else{
            console.log('log out');
           return db.collection("score").add({
-      
+
+            
             date: today,
             score: puntuacion,
             
@@ -196,83 +197,122 @@ if (document.title == "Hoja de preguntas") {
   
   let arrFechas = [];
   let arrPuntuaciones = [];
+  let arrData = [];
 
   function getFirestore() {
     auth.onAuthStateChanged(user => {
       if(user){
         return db.collection("score").where("email", "==", user.email).get().then((querySnapshot) => {
           querySnapshot.forEach((doc) => {
-              console.log(`${doc.id} => ${doc.data().score} => ${doc.data().date}`);
-              
-              arrPuntuaciones.push(doc.data().score);
-              let fechas = doc.data().date;
-              //fechas = fechas.substring(0, 6);
-              arrFechas.push(fechas);
-              
-    
-              console.log(arrPuntuaciones);
-              console.log(arrFechas);
-    
-              document.getElementById(
-                "datosguardados"
-              ).innerHTML = `<div>${doc.data().score}/10</div>`;
-          });
-          new Chartist.Bar(
-            "#puntuaciones",
-            {
-              labels: arrFechas,
-              series: [arrPuntuaciones],
+            //console.log(`${doc.id} => ${doc.data().score} => ${doc.data().date}`);
+            console.log(doc.data());
+
+            arrData.push(doc.data());
+            
+        });
+       
+        const sortByDate = arr => {
+          const sorter = (a, b) => {
+             return new Date(b.date).getTime() - new Date(a.date).getTime();
+          }
+          arr.sort(sorter);
+       };
+       sortByDate(arrData);
+       console.log(arrData);
+        
+       arrData.forEach((data) => {
+        arrPuntuaciones.unshift(data.date)
+        arrFechas.unshift(data.score)
+       })
+
+       console.log(arrPuntuaciones);
+       console.log(arrFechas);
+        
+        
+        
+
+        //console.log(arrPuntuaciones);
+        //console.log(arrFechas);
+
+         document.getElementById(
+          "datosguardados"
+        ).innerHTML = `<div>${arrData[0].score}/10</div>`; 
+
+        new Chartist.Bar(
+          "#puntuaciones",
+          {
+            labels: arrPuntuaciones,
+            series: [arrFechas],
+          },
+          {
+            width: 400,
+            height: 330,
+            horizontalBars: true,
+            //seriesBarDistance: 5,
+            axisX: {
+              offset: 10,
+              onlyInteger: true,
             },
-            {
-              width: 400,
-              height: 330,
-              horizontalBars: true,
-              //seriesBarDistance: 5,
-              axisX: {
-                offset: 10,
-                onlyInteger: true,
+            axisY: {
+              onlyInteger: true,
+              offset: 160,
+              labelInterpolationFnc: function (value) {
+                return value + "";
               },
-              axisY: {
-                onlyInteger: true,
-                offset: 160,
-                labelInterpolationFnc: function (value) {
-                  return value + "";
-                },
-              },
-            }
-          ).on("draw", function (data) {
-            if (data.type === "bar") {
-              data.element.attr({
-                style: "stroke-width: 10px",
-              });
-            }
-          });
-      });
+            },
+          }
+        ).on("draw", function (data) {
+          if (data.type === "bar") {
+            data.element.attr({
+              style: "stroke-width: 10px",
+            });
+          }
+        });
+    });
     
 
       }else{
-        return db.collection("score").where("email", "!=", true).get().then((querySnapshot) => {
+        return db.collection("score").get().then((querySnapshot) => {
           querySnapshot.forEach((doc) => {
-              console.log(`${doc.id} => ${doc.data().score} => ${doc.data().date}`);
+              //console.log(`${doc.id} => ${doc.data().score} => ${doc.data().date}`);
+              console.log(doc.data());
+
+              arrData.push(doc.data());
               
-              arrPuntuaciones.push(doc.data().score);
-              let fechas = doc.data().date;
-              //fechas = fechas.substring(0, 6);
-              arrFechas.push(fechas);
-              
-    
-              console.log(arrPuntuaciones);
-              console.log(arrFechas);
-    
-              document.getElementById(
-                "datosguardados"
-              ).innerHTML = `<div>${doc.data().score}/10</div>`;
           });
+         
+          const sortByDate = arr => {
+            const sorter = (a, b) => {
+               return new Date(b.date).getTime() - new Date(a.date).getTime();
+            }
+            arr.sort(sorter);
+         };
+         sortByDate(arrData);
+         console.log(arrData);
+          
+         arrData.forEach((data) => {
+          arrPuntuaciones.unshift(data.date)
+          arrFechas.unshift(data.score)
+         })
+
+         console.log(arrPuntuaciones);
+         console.log(arrFechas);
+          
+          
+          
+
+          //console.log(arrPuntuaciones);
+          //console.log(arrFechas);
+
+           document.getElementById(
+            "datosguardados"
+          ).innerHTML = `<div>${arrData[0].score}/10</div>`; 
+
           new Chartist.Bar(
             "#puntuaciones",
             {
-              labels: arrFechas,
-              series: [arrPuntuaciones],
+              labels: arrPuntuaciones,
+              series: [arrFechas],
             },
             {
               width: 400,
