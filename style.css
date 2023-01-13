@@ -1,137 +1,254 @@
-body {
-    background-color: rgb(158, 200, 232);
+#fondoAzul {
+    background-color: rgb(214, 233, 255);
+    height: 90vh;
+}
+
+#fondoBlanco {
+    background-color: rgb(255, 255, 255);
 }
 
 main {
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-top: 10%;
-
+    margin-top: 5%;
 }
 
 #espacioTotal {
     display: flex;
     flex-direction: column;
     align-items: center;
-    border: solid rgb(0, 2, 2);
-    border-width: 5px;
-
-    height: 90vh;
-    width: 90%;
-    font-size: 4vh;
+    height: 85vh;
+    width: 95%;
     font-weight: bolder;
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
-    background-image: linear-gradient(rgb(107, 121, 224), rgb(255, 255, 250));
+    background-image: linear-gradient(rgb(111, 178, 255), rgb(255, 255, 250));
+    border-radius: 30px;
 }
 
 #espacioPregunta {
-    height: 30%;
+    height: auto;
     font-style: italic;
-    margin: 3% 5% 0%;
+    margin: 8% 5% 10%;
+    font-size: 7vw;
+    color: white;
+    max-width: 90%;
+    word-wrap: break-word;
 }
 
 #opciones {
-    margin-top: 20%;
-    margin-bottom: 3%;
-    margin-left: 5%;
-
-
-    font-size: 4vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 1px;
+    margin: 0% 50% 0%;
+    height: 50%;
 }
 
 div {
     margin-bottom: 5%;
 }
 
+.formatoRespuestas {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+label {
+    width: 70vw;
+    color: white;
+    font-size: 120%;
+    text-align: center;
+    background-color: rgb(78, 93, 206);
+    border-radius: 50px;
+    padding: 10px 20px;
+}
+
+input:checked+label {
+    color: rgb(78, 93, 206);
+    text-shadow: 0px 2px 5px rgb(94, 94, 94);
+    font-style: italic;
+    background-color: white;
+}
+
+input {
+    display: none;
+}
+
 #btn {
     background-color: rgb(76, 113, 233);
     font-weight: bolder;
     color: white;
-    font-size: 80%;
-    padding: 0% 7%;
+    font-size: 110%;
+    padding: 5% 40%;
     border-width: 5px;
-    position: sticky;
-    margin-top: 5%;
+    border-radius: 50px;
+    display: inline-flex;
+}
+
+#formatoNext {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+button:active {
+    background-color: #3E4E8E;
+    box-shadow: 0 5px #666;
+    transform: translateY(4px);
 }
 
 /*HOME/RESULTS*/
-#start{
+.start {
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: center;
+    width: 95%;
 }
 
 h1 {
-    color: white;
-    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
-    font-size: 150%;
+    color: rgb(23, 27, 45);
+    text-shadow: 0px 4px rgb(59, 85, 92);
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    font-size: 50px;
+    margin-bottom: 70px;
 }
 
-#centrarResultados{
+#centrarResultados {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.btnStart {
+    background-color: rgb(76, 113, 233);
+    font-weight: bolder;
+    color: white;
+    font-size: 2.5em;
+    padding: 10% 20%;
+    border-width: 5px;
+    border-radius: 50px;
+    display: inline-flex;
+    justify-content: center;
+    width: 140%;
+}
+
+#btnResults {
+    background-color: rgb(76, 113, 233);
+    font-weight: bolder;
+    color: white;
+    font-size: 150%;
+    padding: 6% 20%;
+    margin-top: 15%;
+    position: sticky;
+    border-radius: 50px;
+    display: inline-flex;
+}
+
+#botonn {
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 
-#btnStart {
-    background-color: rgb(76, 113, 233);
-    font-weight: bolder;
-    color: white;
-    font-size: 150%;
-    padding: 20% 50%;
-    border-width: 5px;
-    margin-top: 2%;
-}
-
-#btnResults{
-    background-color: rgb(76, 113, 233);
-    font-weight: bolder;
-    color: white; 
-    font-size: 150%;
-    padding: 2% 6%;
-    margin-top: 15%;
-    position: sticky;
-}
-
-#datosguardados{
-    border: solid black;
+#datosguardados {
+    border: solid rgb(211, 238, 115);
     border-style: dotted;
+    border-radius: 30px;
     padding: 5%;
     font-size: 300%;
     background-color: rgb(224, 190, 102);
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif
 }
 
-input:hover{
-    cursor:pointer;
+label:hover {
+    cursor: pointer;
+}
+
+input:hover {
+    cursor: pointer;
 }
 
 #puntuaciones .ct-series-a .ct-bar {
     /* Colour of your bars */
-    stroke: rgb(248, 13, 13);
-  }
+    stroke: rgb(63, 60, 232);
+}
 
-@media screen and (min-width: 768px) and (max-width:1366px) {
+#centrarGraph {
+    margin-right: 450px;
+}
+
+#login-form {
+    margin-top: 10%;
+    margin-bottom: 20%;
+}
+
+#sign-email,
+#sign-pass,
+#login-email,
+#login-pass {
+    font-size: 100%;
+    margin-bottom: 5%;
+}
+
+.login {
+    display: flex;
+}
+
+#sign-submit, #login-submit, #log_out {
+    background-color: rgb(78, 93, 206);
+    color: white;
+    border-radius: 50px;
+    padding: 2%;
+}
+
+@media screen and (min-width: 768px) and (max-width:1266px) {
     #espacioPregunta {
-        margin: 3% 3% 1%;
-        font-size: 60px;
+        margin: 3% 3% 10%;
+        font-size: 250%;
     }
 
-    #opciones {
-        margin-top: 5%;
-        margin-bottom: 0%;
-        margin-left: 5%;
-
-
-        font-size: 4vh;
+    label {
+        font-size: 200%;
+        width: 700px;
+        margin-bottom: 2%;
     }
 
     h1 {
         font-size: 500%;
     }
-    
-    #btnStart {
-        font-size: 450%;
+
+    h2 {
+        font-size: 600%;
+    }
+
+    #btn {
+        padding: 5% 50%;
+        font-size: 250%;
+    }
+
+    .btnStart {
+        font-size: 250%;
+        width: 60vw;
+    }
+
+    #datosguardados {
+        font-size: 300%;
+    }
+
+    #btnResults {
+        font-size: 250%;
+    }
+
+    #sign-email,
+    #sign-pass,
+    #login-email,
+    #login-pass {
+        font-size: 200%;
     }
 }
 
@@ -140,24 +257,42 @@ input:hover{
         margin-top: 2%;
     }
 
-    #espacioTotal {
-        height: 50%;
+    #espacioPregunta {
+        font-size: 300%;
+        margin: 2% 5% 1%;
     }
 
-    #opciones {
-        margin-top: 4%;
-        margin-left: 0%;
+    label {
+        font-size: 300%;
+        width: 85vw;
+        margin-bottom: 2%;
+    }
+
+    .formatoRespuestas {
+        display: contents;
     }
 
     #btn {
         margin-bottom: 2%;
+        padding: 5% 50%;
     }
 
     h1 {
         font-size: 600%;
     }
 
-    #btnStart {
+    h2 {
         font-size: 300%;
+    }
+
+    .btnStart {
+        font-size: 300%;
+    }
+
+    #sign-email,
+    #sign-pass,
+    #login-email,
+    #login-pass {
+        font-size: 200%;
     }
 }

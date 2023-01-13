@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="icon" type="image/x-icon" href="./icon-trivia.png.crdownload">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body id="fondoAzul" class="start">
+    <header>
+        <h2>Let's sign!</h1>
+    </header>
+    <main>
+        <form action="" id="sign-form" class="form">
+            <div class="formatoLogin">
+                <input type="email" id="sign-email" placeholder="Email" class="login">
+                <input type="password" id="sign-pass" placeholder="Password" class="login">
+                <input type="submit" id="sign-submit" value="SIGN IN >" class="login">
+
+
+            </div>
+        </form>
+
+        <form action="" id="login-form" class="form">
+            <div class="formatoLogin">
+                <input type="email" id="login-email" placeholder="Email" class="login">
+                <input type="password" id="login-pass" placeholder="Password" class="login">
+                <input type="submit" id="login-submit" value="LOG IN >" class="login">
+
+            </div>
+            <button class="log_link" id="log_out">< LOG OUT</button>
+
+        </form>
+        <div class="start">
+            <input type="button" class='btnStart' value="New game" onclick="window.location.href='./question.html';">
+        </div>
+    </main>
+    <footer></footer>
+    <script src="https://www.gstatic.com/firebasejs/8.7.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.7.1/firebase-firestore.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.7.1/firebase-auth.js"></script>
+    <script src="./preguntas.js"></script>
+</body>
+
+</html>
