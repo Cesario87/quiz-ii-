@@ -60,7 +60,7 @@ if (document.title == "Hoja de preguntas") {
       let imprimir2 = "";
 
       for (let j = 0; j < arrMezcla.length; j++) {
-        imprimir2 += `<div id="formatoRespuestas">
+        imprimir2 += `<div class="formatoRespuestas">
           <input type="radio" id="radio${num + j}" name="${num}" value="${
           arrMezcla[j]
         }"> 
@@ -431,7 +431,11 @@ if (document.title =='Login') {
             signInForm.reset();
 
             console.log('sign in');
-        })
+        }).catch((error) => {
+          //let errorCode = error.code;
+          let errorMessage = error.message;
+          alert(errorMessage);
+        });
 });
 
 //Log In 
@@ -450,7 +454,12 @@ if (document.title =='Login') {
             signInForm.reset();
 
             console.log('log in');
-        })
+        }).catch((error) => {
+          //let errorCode = error.code;
+         
+          let errorMessage = error.message;
+          alert(errorMessage)
+        });
 })
 
 //Log Out

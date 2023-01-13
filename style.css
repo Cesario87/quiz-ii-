@@ -29,7 +29,7 @@ main {
 #espacioPregunta {
     height: auto;
     font-style: italic;
-    margin: 8% 5% 5%;
+    margin: 8% 5% 10%;
     font-size: 7vw;
     color: white;
     max-width: 90%;
@@ -43,21 +43,21 @@ main {
     justify-content: center;
     gap: 1px;
     margin: 0% 50% 0%;
-    height: 60%;
+    height: 50%;
 }
 
 div {
     margin-bottom: 5%;
 }
 
-#formatoRespuestas {
+.formatoRespuestas {
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 
 label {
-    width: 250px;
+    width: 70vw;
     color: white;
     font-size: 120%;
     text-align: center;
@@ -165,6 +165,10 @@ h1 {
     font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif
 }
 
+label:hover {
+    cursor: pointer;
+}
+
 input:hover {
     cursor: pointer;
 }
@@ -178,17 +182,38 @@ input:hover {
     margin-right: 450px;
 }
 
-@media screen and (min-width: 768px) and (max-width:1366px) {
-    #espacioPregunta {
-        margin: 3% 3% 1%;
-        font-size: 60px;
-    }
+#login-form {
+    margin-top: 10%;
+    margin-bottom: 20%;
+}
 
-    #opciones {
-        font-size: 3vh;
+#sign-email,
+#sign-pass,
+#login-email,
+#login-pass {
+    font-size: 100%;
+    margin-bottom: 5%;
+}
+
+.login {
+    display: flex;
+}
+
+#sign-submit, #login-submit, #log_out {
+    background-color: rgb(78, 93, 206);
+    color: white;
+    border-radius: 50px;
+    padding: 2%;
+}
+
+@media screen and (min-width: 768px) and (max-width:1266px) {
+    #espacioPregunta {
+        margin: 3% 3% 10%;
+        font-size: 250%;
     }
 
     label {
+        font-size: 200%;
         width: 700px;
         margin-bottom: 2%;
     }
@@ -197,8 +222,8 @@ input:hover {
         font-size: 500%;
     }
 
-    h2{
-        font-size: 500%;
+    h2 {
+        font-size: 600%;
     }
 
     #btn {
@@ -207,17 +232,24 @@ input:hover {
     }
 
     .btnStart {
-        font-size: 450%;
+        font-size: 250%;
+        width: 60vw;
     }
 
     #datosguardados {
-        font-size: 450%;
+        font-size: 300%;
     }
 
     #btnResults {
         font-size: 250%;
     }
 
+    #sign-email,
+    #sign-pass,
+    #login-email,
+    #login-pass {
+        font-size: 200%;
+    }
 }
 
 @media screen and (min-width: 1266px) {
@@ -232,11 +264,11 @@ input:hover {
 
     label {
         font-size: 300%;
-        width: 1400px;
+        width: 85vw;
         margin-bottom: 2%;
     }
 
-    #formatoRespuestas {
+    .formatoRespuestas {
         display: contents;
     }
 
@@ -249,13 +281,18 @@ input:hover {
         font-size: 600%;
     }
 
+    h2 {
+        font-size: 300%;
+    }
+
     .btnStart {
         font-size: 300%;
     }
-}
 
-/* FORMULARIO FIREBASE */
-
-.login{
-    display: flex;
+    #sign-email,
+    #sign-pass,
+    #login-email,
+    #login-pass {
+        font-size: 200%;
+    }
 }

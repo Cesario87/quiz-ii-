@@ -1,21 +1,23 @@
 # quiz-ii-
 
-Objetivo
+*El Quiz consta de 10 preguntas. 
+Cada pregunta tiene 4 opciones (o 2 verdadero/falso) y sólo una de ellas será la correcta.
 
-El Quiz constará de 10 preguntas. 
-Cada pregunta tendrá 4 opciones y sólo una de ellas será la correcta.
-Las preguntas las obtenemos de https://opentdb.com/
+*Las preguntas las obtenemos aleatoriamente de la API https://opentdb.com/
 Se muestra una pregunta cada vez en pantalla y mediante un botón pasamos a la siguiente. Al contestar 10 preguntas muestra los resultados.
 
-La puntuación se almacena en localStorage para mostrarse al final.
+*La puntuación se almacenaba en localStorage, pero ahora lo hace en Firebase para mostrarse al final (aunque el código se ha mantenido comentado). 
 
-En la pantalla de resultado se refleja la gráfica pero no se muestran las barras al almacenarse solo un resultado. 
+*El usuario puede logearse para ver su propia gráfica de resultados.
 
-La idea es almacenar mas resultados en la siguiente version.
-
-El localStorage se resetea al pulsar el botón de Home para permitir que se muestre un nuevo resultado al final.
-
-En la página de inicio el botón se situa arriba para reservar espacio para colocar una gráfica que muestre las puntuaciones de los usuarios en un futuro.
+*En la pantalla de resultado se genera la gráfica de resultados, que muestra las puntuaciones de todos los usuarios si no se hace login, o sólo las del usuario, si este se logea. 
 
 
+               ,.-----__
+            ,:::://///,:::-.
+           /:''/////// ``:::`;/|/
+          /'   ||||||     :://'`\\
+        .' ,   ||||||     `/(  e \\
+  -===~__-'\\__X_`````\\_____/~`-._ `.
+              ~~        ~~       `~-'
 
